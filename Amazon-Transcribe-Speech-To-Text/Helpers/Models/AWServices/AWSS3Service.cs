@@ -170,24 +170,26 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             }
         }
 
-        public async Task<bool> DownloadFileS3(AWSUtil awsUtilProperts)
+        public async Task<string> DownloadFileS3(AWSUtil awsUtilProperts)
         {
             try
             {
                 if (S3Client())
                 {
+                    string nomeFile = @"..\..\..\Audios\" + awsUtilProperts.FileNameActual;
                     TransferUtility fileTransferUtility = new TransferUtility(s3Client);
                     TransferUtilityDownloadRequest transferUtilityDownloadRequest = new TransferUtilityDownloadRequest()
                     {
-                        BucketName = awsUtilProperts.BucketNameOutput,
+                        BucketName = awsUtilProperts.BucketNameInput,
                         Key = awsUtilProperts.FileNameActual,
-                        FilePath = ""
+                        FilePath = nomeFile,
                     };
-                    return true;
+                    await fileTransferUtility.DownloadAsync(transferUtilityDownloadRequest);
+                    return nomeFile;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
             catch (Exception)

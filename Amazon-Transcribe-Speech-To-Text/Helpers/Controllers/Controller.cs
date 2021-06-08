@@ -3,6 +3,7 @@ using Amazon.TranscribeService.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
 using AWS_Rekognition_Objects.Helpers.Model;
 using NAudio.Wave;
 using System;
@@ -32,7 +33,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
            // this.awsServices = new AWSServices(this);
             this.playerMedia = new PlayerMedia(this);
             this.awsS3Service = new AWSS3Service();
-            this.transcribeService = new AWSTranscribeService();
+            this.transcribeService = new AWSTranscribeService(this);
             this.awsUtil = new AWSUtil();
         }
         public List<string> getLoadS3ListBuckets() {
@@ -69,9 +70,9 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             formTranscribe.bindTextContent(contentText);
         }
 
-        public async Task displayParametersCurrents(TimeSpan currentAudio, Item item) {
+        public async Task displayParametersCurrents(TimeSpan currentAudio, Item item, Segment segment) {
             formTranscribe.displayStatusCurrentProgress(currentAudio);
-            formTranscribe.displayTrancribe(item);
+            formTranscribe.displayTrancribe(item, segment);
         }
 
         public bool setFromNameBuckets(string bucketInput, string bucketOutput)
@@ -124,8 +125,22 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
 
         public void TranscribeObject()
         {
-            speechToText = new SpeechToText(this, awsS3Service,transcribeService,awsUtil);
+            speechToText = new SpeechToText(this,awsUtil);
 
+        }
+        public async void getTranscriptInformation(string selectTranscribe)
+        {
+            GetTranscriptionJobResponse getTranscriptionJob = await transcribeService.requestGetPropertsTranscribe(selectTranscribe);
+            if (getTranscriptionJob.HttpStatusCode == System.Net.HttpStatusCode.OK)
+            {
+                TranscriptionJob transcriptionJob = getTranscriptionJob.TranscriptionJob;
+                string transcriptURL = transcriptionJob.Transcript.TranscriptFileUri;
+                awsUtil.JobName = Path.GetFileName(transcriptURL);
+                string mediaURL = transcriptionJob.Media.MediaFileUri;
+                awsUtil.FileNameActual = Path.GetFileName(mediaURL);
+
+                //speechToText = new SpeechToText(this, awsUtil);
+            }
         }
 
         #region controlesAudio
@@ -151,8 +166,9 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         }
 
         public void setRemoveContentSelect(double valueStart, double valueEnd, int indexSelect)
-        {
-            Item item = speechToText.removeContentItem(valueStart, valueEnd, indexSelect);
+        {            
+            Item item = speechToText.actualizarContentTempo(valueStart, valueEnd, indexSelect);
+            //Item item = speechToText.removeContentItem(valueStart, valueEnd, indexSelect);
             if (item != null)
             {
                 if (item.alternatives.Count != 0)
@@ -167,6 +183,8 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             List<Entity.Transcript> contentText = speechToText.regenerate();
             formTranscribe.bindTextContent(contentText);
         }
+
+
 
 
         #endregion

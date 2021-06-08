@@ -31,13 +31,6 @@ namespace Amazon_Transcribe_Speech_To_Text
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.tbAccountant = new System.Windows.Forms.TextBox();
-            this.lblTempoTotal = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
-            this.trackBarStateAudio = new System.Windows.Forms.TrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSelectBucktes = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,6 +38,13 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label3 = new System.Windows.Forms.Label();
             this.cbBucketsOutputS3 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tbAccountant = new System.Windows.Forms.TextBox();
+            this.lblTempoTotal = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
+            this.trackBarStateAudio = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAnalizer = new System.Windows.Forms.Button();
             this.btnSearchFiles = new System.Windows.Forms.Button();
@@ -56,16 +56,12 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel5 = new System.Windows.Forms.Panel();
             this.label28 = new System.Windows.Forms.Label();
             this.lblHertz = new System.Windows.Forms.Label();
-            this.lbl = new System.Windows.Forms.Label();
             this.lblLanguage = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.btnLoadTranscription = new System.Windows.Forms.Button();
+            this.btnLoadLastTranscription = new System.Windows.Forms.Button();
             this.lblFormat = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.lblStatusJob = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.lblNameJob = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.lblFileSelecionado = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -77,7 +73,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label8 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnLoadTranscription = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.cbJobTranscribe = new System.Windows.Forms.ComboBox();
             this.lblNameBucketOutput = new System.Windows.Forms.Label();
@@ -89,15 +85,17 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label6 = new System.Windows.Forms.Label();
             this.lblNameBucketInput = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.tabGerenciarTranscricao = new System.Windows.Forms.TabPage();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPageAudio = new System.Windows.Forms.TabPage();
             this.btnReGerar = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.lblNumItem = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
+            this.lblContentActual = new System.Windows.Forms.Label();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.btnAddContent = new System.Windows.Forms.Button();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.cbAlternative = new System.Windows.Forms.ComboBox();
@@ -122,10 +120,20 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.button5 = new System.Windows.Forms.Button();
             this.ofdSearchFiles = new System.Windows.Forms.OpenFileDialog();
             this.label16 = new System.Windows.Forms.Label();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.panelMenu.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStateAudio)).BeginInit();
-            this.panel1.SuspendLayout();
             this.panelExibicao.SuspendLayout();
             this.tabControlBody.SuspendLayout();
             this.tabPageFile.SuspendLayout();
@@ -134,23 +142,100 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel3.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.tabGerenciarTranscricao.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.tabPageAudio.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.Tan;
-            this.panelMenu.Controls.Add(this.panel2);
             this.panelMenu.Controls.Add(this.panel1);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(994, 168);
+            this.panelMenu.Size = new System.Drawing.Size(1115, 101);
             this.panelMenu.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.BurlyWood;
+            this.panel1.Controls.Add(this.btnSelectBucktes);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.cbBucketsInputS3);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.cbBucketsOutputS3);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1115, 93);
+            this.panel1.TabIndex = 0;
+            // 
+            // btnSelectBucktes
+            // 
+            this.btnSelectBucktes.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelectBucktes.BackgroundImage")));
+            this.btnSelectBucktes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSelectBucktes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSelectBucktes.Location = new System.Drawing.Point(774, 23);
+            this.btnSelectBucktes.Name = "btnSelectBucktes";
+            this.btnSelectBucktes.Size = new System.Drawing.Size(57, 50);
+            this.btnSelectBucktes.TabIndex = 15;
+            this.btnSelectBucktes.UseVisualStyleBackColor = true;
+            this.btnSelectBucktes.Click += new System.EventHandler(this.btnSelectBucktes_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(261, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 15);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Bucket de Entrada:";
+            // 
+            // cbBucketsInputS3
+            // 
+            this.cbBucketsInputS3.BackColor = System.Drawing.Color.NavajoWhite;
+            this.cbBucketsInputS3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbBucketsInputS3.FormattingEnabled = true;
+            this.cbBucketsInputS3.Location = new System.Drawing.Point(374, 15);
+            this.cbBucketsInputS3.Name = "cbBucketsInputS3";
+            this.cbBucketsInputS3.Size = new System.Drawing.Size(359, 23);
+            this.cbBucketsInputS3.TabIndex = 15;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(261, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(105, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Bucket de Destino:";
+            // 
+            // cbBucketsOutputS3
+            // 
+            this.cbBucketsOutputS3.BackColor = System.Drawing.Color.NavajoWhite;
+            this.cbBucketsOutputS3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbBucketsOutputS3.FormattingEnabled = true;
+            this.cbBucketsOutputS3.Location = new System.Drawing.Point(374, 55);
+            this.cbBucketsOutputS3.Name = "cbBucketsOutputS3";
+            this.cbBucketsOutputS3.Size = new System.Drawing.Size(359, 23);
+            this.cbBucketsOutputS3.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Square721 BT", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(33, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(194, 22);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "AWS TRANSCRIBE";
             // 
             // panel2
             // 
@@ -161,11 +246,10 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel2.Controls.Add(this.button7);
             this.panel2.Controls.Add(this.btnPlay);
             this.panel2.Controls.Add(this.trackBarStateAudio);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Enabled = false;
-            this.panel2.Location = new System.Drawing.Point(0, 99);
+            this.panel2.Location = new System.Drawing.Point(143, 14);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(994, 69);
+            this.panel2.Size = new System.Drawing.Size(805, 62);
             this.panel2.TabIndex = 1;
             // 
             // tbAccountant
@@ -236,81 +320,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.trackBarStateAudio.Scroll += new System.EventHandler(this.trackBarStateAudio_Scroll);
             this.trackBarStateAudio.ValueChanged += new System.EventHandler(this.trackBarStateAudio_ValueChanged);
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.BurlyWood;
-            this.panel1.Controls.Add(this.btnSelectBucktes);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.cbBucketsInputS3);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.cbBucketsOutputS3);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(994, 93);
-            this.panel1.TabIndex = 0;
-            // 
-            // btnSelectBucktes
-            // 
-            this.btnSelectBucktes.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelectBucktes.BackgroundImage")));
-            this.btnSelectBucktes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSelectBucktes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelectBucktes.Location = new System.Drawing.Point(774, 23);
-            this.btnSelectBucktes.Name = "btnSelectBucktes";
-            this.btnSelectBucktes.Size = new System.Drawing.Size(57, 50);
-            this.btnSelectBucktes.TabIndex = 15;
-            this.btnSelectBucktes.UseVisualStyleBackColor = true;
-            this.btnSelectBucktes.Click += new System.EventHandler(this.btnSelectBucktes_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 15);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Bucket de Entrada:";
-            // 
-            // cbBucketsInputS3
-            // 
-            this.cbBucketsInputS3.BackColor = System.Drawing.Color.NavajoWhite;
-            this.cbBucketsInputS3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbBucketsInputS3.FormattingEnabled = true;
-            this.cbBucketsInputS3.Location = new System.Drawing.Point(374, 15);
-            this.cbBucketsInputS3.Name = "cbBucketsInputS3";
-            this.cbBucketsInputS3.Size = new System.Drawing.Size(359, 23);
-            this.cbBucketsInputS3.TabIndex = 15;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Bucket de Destino:";
-            // 
-            // cbBucketsOutputS3
-            // 
-            this.cbBucketsOutputS3.BackColor = System.Drawing.Color.NavajoWhite;
-            this.cbBucketsOutputS3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbBucketsOutputS3.FormattingEnabled = true;
-            this.cbBucketsOutputS3.Location = new System.Drawing.Point(374, 55);
-            this.cbBucketsOutputS3.Name = "cbBucketsOutputS3";
-            this.cbBucketsOutputS3.Size = new System.Drawing.Size(359, 23);
-            this.cbBucketsOutputS3.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Square721 BT", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(33, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 22);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "AWS TRANSCRIBE";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -350,21 +359,22 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panelExibicao.BackColor = System.Drawing.Color.Tan;
             this.panelExibicao.Controls.Add(this.tabControlBody);
             this.panelExibicao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelExibicao.Location = new System.Drawing.Point(0, 168);
+            this.panelExibicao.Location = new System.Drawing.Point(0, 101);
             this.panelExibicao.Name = "panelExibicao";
-            this.panelExibicao.Size = new System.Drawing.Size(994, 513);
+            this.panelExibicao.Size = new System.Drawing.Size(1115, 592);
             this.panelExibicao.TabIndex = 1;
             // 
             // tabControlBody
             // 
             this.tabControlBody.Controls.Add(this.tabPageFile);
+            this.tabControlBody.Controls.Add(this.tabGerenciarTranscricao);
             this.tabControlBody.Controls.Add(this.tabPageAudio);
             this.tabControlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlBody.Enabled = false;
             this.tabControlBody.Location = new System.Drawing.Point(0, 0);
             this.tabControlBody.Name = "tabControlBody";
             this.tabControlBody.SelectedIndex = 0;
-            this.tabControlBody.Size = new System.Drawing.Size(994, 513);
+            this.tabControlBody.Size = new System.Drawing.Size(1115, 592);
             this.tabControlBody.TabIndex = 0;
             // 
             // tabPageFile
@@ -374,7 +384,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.tabPageFile.Controls.Add(this.panel3);
             this.tabPageFile.Location = new System.Drawing.Point(4, 24);
             this.tabPageFile.Name = "tabPageFile";
-            this.tabPageFile.Size = new System.Drawing.Size(986, 485);
+            this.tabPageFile.Size = new System.Drawing.Size(1107, 564);
             this.tabPageFile.TabIndex = 0;
             this.tabPageFile.Text = "Gerenciar Files In Bucket";
             // 
@@ -391,7 +401,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel4.Controls.Add(this.label4);
             this.panel4.Location = new System.Drawing.Point(485, 50);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(484, 366);
+            this.panel4.Size = new System.Drawing.Size(484, 378);
             this.panel4.TabIndex = 1;
             // 
             // pgbAnalizer
@@ -405,16 +415,16 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.panel5.Controls.Add(this.label28);
             this.panel5.Controls.Add(this.lblHertz);
-            this.panel5.Controls.Add(this.lbl);
+            this.panel5.Controls.Add(this.label37);
             this.panel5.Controls.Add(this.lblLanguage);
-            this.panel5.Controls.Add(this.label29);
-            this.panel5.Controls.Add(this.btnLoadTranscription);
+            this.panel5.Controls.Add(this.label36);
+            this.panel5.Controls.Add(this.btnLoadLastTranscription);
             this.panel5.Controls.Add(this.lblFormat);
             this.panel5.Controls.Add(this.label14);
             this.panel5.Controls.Add(this.lblStatusJob);
-            this.panel5.Controls.Add(this.label13);
+            this.panel5.Controls.Add(this.label34);
             this.panel5.Controls.Add(this.lblNameJob);
-            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.label33);
             this.panel5.Location = new System.Drawing.Point(6, 117);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(466, 188);
@@ -433,57 +443,37 @@ namespace Amazon_Transcribe_Speech_To_Text
             // lblHertz
             // 
             this.lblHertz.AutoSize = true;
-            this.lblHertz.Location = new System.Drawing.Point(101, 112);
+            this.lblHertz.Location = new System.Drawing.Point(120, 111);
             this.lblHertz.Name = "lblHertz";
             this.lblHertz.Size = new System.Drawing.Size(106, 15);
             this.lblHertz.TabIndex = 26;
             this.lblHertz.Text = "Audio Selecionado";
             // 
-            // lbl
-            // 
-            this.lbl.AutoSize = true;
-            this.lbl.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbl.Location = new System.Drawing.Point(37, 111);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(41, 16);
-            this.lbl.TabIndex = 25;
-            this.lbl.Text = "Herz: ";
-            // 
             // lblLanguage
             // 
             this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Location = new System.Drawing.Point(101, 87);
+            this.lblLanguage.Location = new System.Drawing.Point(120, 86);
             this.lblLanguage.Name = "lblLanguage";
             this.lblLanguage.Size = new System.Drawing.Size(106, 15);
             this.lblLanguage.TabIndex = 24;
             this.lblLanguage.Text = "Audio Selecionado";
             // 
-            // label29
+            // btnLoadLastTranscription
             // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label29.Location = new System.Drawing.Point(8, 86);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(76, 16);
-            this.label29.TabIndex = 23;
-            this.label29.Text = "Linguagem: ";
-            // 
-            // btnLoadTranscription
-            // 
-            this.btnLoadTranscription.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoadTranscription.BackgroundImage")));
-            this.btnLoadTranscription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnLoadTranscription.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLoadTranscription.Location = new System.Drawing.Point(341, 144);
-            this.btnLoadTranscription.Name = "btnLoadTranscription";
-            this.btnLoadTranscription.Size = new System.Drawing.Size(37, 32);
-            this.btnLoadTranscription.TabIndex = 17;
-            this.btnLoadTranscription.UseVisualStyleBackColor = true;
-            this.btnLoadTranscription.Click += new System.EventHandler(this.btnLoadTranscription_Click);
+            this.btnLoadLastTranscription.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoadLastTranscription.BackgroundImage")));
+            this.btnLoadLastTranscription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLoadLastTranscription.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLoadLastTranscription.Location = new System.Drawing.Point(341, 144);
+            this.btnLoadLastTranscription.Name = "btnLoadLastTranscription";
+            this.btnLoadLastTranscription.Size = new System.Drawing.Size(37, 32);
+            this.btnLoadLastTranscription.TabIndex = 17;
+            this.btnLoadLastTranscription.UseVisualStyleBackColor = true;
+            this.btnLoadLastTranscription.Click += new System.EventHandler(this.btnLoadLastTranscription_Click);
             // 
             // lblFormat
             // 
             this.lblFormat.AutoSize = true;
-            this.lblFormat.Location = new System.Drawing.Point(123, 62);
+            this.lblFormat.Location = new System.Drawing.Point(120, 61);
             this.lblFormat.Name = "lblFormat";
             this.lblFormat.Size = new System.Drawing.Size(106, 15);
             this.lblFormat.TabIndex = 22;
@@ -493,7 +483,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label14.Location = new System.Drawing.Point(8, 62);
+            this.label14.Location = new System.Drawing.Point(5, 61);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(109, 16);
             this.label14.TabIndex = 21;
@@ -502,40 +492,20 @@ namespace Amazon_Transcribe_Speech_To_Text
             // lblStatusJob
             // 
             this.lblStatusJob.AutoSize = true;
-            this.lblStatusJob.Location = new System.Drawing.Point(101, 38);
+            this.lblStatusJob.Location = new System.Drawing.Point(120, 37);
             this.lblStatusJob.Name = "lblStatusJob";
             this.lblStatusJob.Size = new System.Drawing.Size(106, 15);
             this.lblStatusJob.TabIndex = 20;
             this.lblStatusJob.Text = "Audio Selecionado";
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(8, 37);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(90, 16);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "Status do JOB:";
-            // 
             // lblNameJob
             // 
             this.lblNameJob.AutoSize = true;
-            this.lblNameJob.Location = new System.Drawing.Point(101, 13);
+            this.lblNameJob.Location = new System.Drawing.Point(120, 12);
             this.lblNameJob.Name = "lblNameJob";
             this.lblNameJob.Size = new System.Drawing.Size(106, 15);
             this.lblNameJob.TabIndex = 18;
             this.lblNameJob.Text = "Audio Selecionado";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(8, 12);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 16);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "Nome do JOB:";
             // 
             // lblFileSelecionado
             // 
@@ -573,7 +543,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel3.Controls.Add(this.label5);
             this.panel3.Location = new System.Drawing.Point(3, 9);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(471, 468);
+            this.panel3.Size = new System.Drawing.Size(471, 473);
             this.panel3.TabIndex = 0;
             // 
             // panel11
@@ -646,7 +616,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.panel10.BackColor = System.Drawing.Color.BurlyWood;
             this.panel10.Controls.Add(this.label30);
-            this.panel10.Controls.Add(this.button2);
+            this.panel10.Controls.Add(this.btnLoadTranscription);
             this.panel10.Controls.Add(this.label11);
             this.panel10.Controls.Add(this.cbJobTranscribe);
             this.panel10.Controls.Add(this.lblNameBucketOutput);
@@ -666,16 +636,17 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label30.TabIndex = 29;
             this.label30.Text = "View Transcription";
             // 
-            // button2
+            // btnLoadTranscription
             // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(395, 95);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(37, 32);
-            this.button2.TabIndex = 28;
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnLoadTranscription.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoadTranscription.BackgroundImage")));
+            this.btnLoadTranscription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLoadTranscription.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLoadTranscription.Location = new System.Drawing.Point(395, 95);
+            this.btnLoadTranscription.Name = "btnLoadTranscription";
+            this.btnLoadTranscription.Size = new System.Drawing.Size(37, 32);
+            this.btnLoadTranscription.TabIndex = 28;
+            this.btnLoadTranscription.UseVisualStyleBackColor = true;
+            this.btnLoadTranscription.Click += new System.EventHandler(this.btnLoadTranscription_Click);
             // 
             // label11
             // 
@@ -696,6 +667,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.cbJobTranscribe.Name = "cbJobTranscribe";
             this.cbJobTranscribe.Size = new System.Drawing.Size(342, 23);
             this.cbJobTranscribe.TabIndex = 20;
+            this.cbJobTranscribe.SelectedIndexChanged += new System.EventHandler(this.cbJobTranscribe_SelectedIndexChanged);
             // 
             // lblNameBucketOutput
             // 
@@ -784,6 +756,52 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label5.TabIndex = 0;
             this.label5.Text = "Gerenciar Arquivos no Bucket";
             // 
+            // tabGerenciarTranscricao
+            // 
+            this.tabGerenciarTranscricao.BackColor = System.Drawing.Color.BurlyWood;
+            this.tabGerenciarTranscricao.Controls.Add(this.panel12);
+            this.tabGerenciarTranscricao.Location = new System.Drawing.Point(4, 24);
+            this.tabGerenciarTranscricao.Name = "tabGerenciarTranscricao";
+            this.tabGerenciarTranscricao.Size = new System.Drawing.Size(1107, 564);
+            this.tabGerenciarTranscricao.TabIndex = 2;
+            this.tabGerenciarTranscricao.Text = "Gerenciar Transcrição";
+            // 
+            // panel12
+            // 
+            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel12.BackColor = System.Drawing.Color.Tan;
+            this.panel12.Controls.Add(this.label21);
+            this.panel12.Controls.Add(this.richTextBox1);
+            this.panel12.Location = new System.Drawing.Point(8, 37);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(970, 239);
+            this.panel12.TabIndex = 0;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label21.Location = new System.Drawing.Point(21, 13);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(185, 19);
+            this.label21.TabIndex = 36;
+            this.label21.Text = "TRANCRIÇÃO COMPLETA";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.BackColor = System.Drawing.Color.BurlyWood;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(18, 41);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(933, 140);
+            this.richTextBox1.TabIndex = 35;
+            this.richTextBox1.Text = "";
+            // 
             // tabPageAudio
             // 
             this.tabPageAudio.BackColor = System.Drawing.Color.BurlyWood;
@@ -793,7 +811,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.tabPageAudio.Location = new System.Drawing.Point(4, 24);
             this.tabPageAudio.Name = "tabPageAudio";
             this.tabPageAudio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAudio.Size = new System.Drawing.Size(986, 485);
+            this.tabPageAudio.Size = new System.Drawing.Size(1107, 564);
             this.tabPageAudio.TabIndex = 1;
             this.tabPageAudio.Text = "View Transcription";
             // 
@@ -810,58 +828,57 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             // panel6
             // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.BackColor = System.Drawing.Color.Tan;
-            this.panel6.Controls.Add(this.label21);
-            this.panel6.Controls.Add(this.richTextBox1);
+            this.panel6.Controls.Add(this.panel2);
             this.panel6.Controls.Add(this.panel9);
             this.panel6.Controls.Add(this.panel8);
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Location = new System.Drawing.Point(8, 35);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(834, 330);
+            this.panel6.Size = new System.Drawing.Size(1091, 330);
             this.panel6.TabIndex = 0;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label21.Location = new System.Drawing.Point(18, 151);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(185, 19);
-            this.label21.TabIndex = 34;
-            this.label21.Text = "TRANCRIÇÃO COMPLETA";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.Color.BurlyWood;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(15, 179);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(804, 140);
-            this.richTextBox1.TabIndex = 24;
-            this.richTextBox1.Text = "";
             // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.BurlyWood;
-            this.panel9.Controls.Add(this.btnRemove);
-            this.panel9.Controls.Add(this.lblNumItem);
             this.panel9.Controls.Add(this.label27);
+            this.panel9.Controls.Add(this.lblContentActual);
+            this.panel9.Controls.Add(this.btnRemove);
             this.panel9.Controls.Add(this.btnAddContent);
             this.panel9.Controls.Add(this.txtContent);
             this.panel9.Controls.Add(this.cbAlternative);
             this.panel9.Controls.Add(this.label25);
             this.panel9.Controls.Add(this.label23);
             this.panel9.Controls.Add(this.label20);
-            this.panel9.Location = new System.Drawing.Point(267, 12);
+            this.panel9.Location = new System.Drawing.Point(221, 92);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(391, 133);
+            this.panel9.Size = new System.Drawing.Size(669, 133);
             this.panel9.TabIndex = 23;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(339, 60);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(104, 15);
+            this.label27.TabIndex = 38;
+            this.label27.Text = "Altere o Conteúdo";
+            // 
+            // lblContentActual
+            // 
+            this.lblContentActual.AutoSize = true;
+            this.lblContentActual.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblContentActual.Location = new System.Drawing.Point(121, 56);
+            this.lblContentActual.Name = "lblContentActual";
+            this.lblContentActual.Size = new System.Drawing.Size(133, 19);
+            this.lblContentActual.TabIndex = 37;
+            this.lblContentActual.Text = "...............................";
             // 
             // btnRemove
             // 
             this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRemove.Location = new System.Drawing.Point(310, 90);
+            this.btnRemove.Location = new System.Drawing.Point(591, 90);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(69, 23);
             this.btnRemove.TabIndex = 36;
@@ -869,31 +886,12 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
-            // lblNumItem
-            // 
-            this.lblNumItem.AutoSize = true;
-            this.lblNumItem.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNumItem.Location = new System.Drawing.Point(200, 9);
-            this.lblNumItem.Name = "lblNumItem";
-            this.lblNumItem.Size = new System.Drawing.Size(18, 19);
-            this.lblNumItem.TabIndex = 24;
-            this.lblNumItem.Text = "0";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(111, 13);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(93, 15);
-            this.label27.TabIndex = 35;
-            this.label27.Text = "Elemento de Nº ";
-            // 
             // btnAddContent
             // 
             this.btnAddContent.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAddContent.BackgroundImage")));
             this.btnAddContent.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddContent.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddContent.Location = new System.Drawing.Point(340, 56);
+            this.btnAddContent.Location = new System.Drawing.Point(591, 53);
             this.btnAddContent.Name = "btnAddContent";
             this.btnAddContent.Size = new System.Drawing.Size(27, 28);
             this.btnAddContent.TabIndex = 34;
@@ -905,7 +903,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.txtContent.BackColor = System.Drawing.Color.BurlyWood;
             this.txtContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtContent.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtContent.Location = new System.Drawing.Point(26, 56);
+            this.txtContent.Location = new System.Drawing.Point(449, 56);
             this.txtContent.Name = "txtContent";
             this.txtContent.Size = new System.Drawing.Size(136, 19);
             this.txtContent.TabIndex = 33;
@@ -918,7 +916,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.cbAlternative.FormattingEnabled = true;
             this.cbAlternative.Location = new System.Drawing.Point(121, 90);
             this.cbAlternative.Name = "cbAlternative";
-            this.cbAlternative.Size = new System.Drawing.Size(183, 23);
+            this.cbAlternative.Size = new System.Drawing.Size(464, 23);
             this.cbAlternative.TabIndex = 17;
             // 
             // label25
@@ -934,7 +932,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(26, 38);
+            this.label23.Location = new System.Drawing.Point(80, 60);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(35, 15);
             this.label23.TabIndex = 30;
@@ -944,7 +942,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label20.Location = new System.Drawing.Point(25, 9);
+            this.label20.Location = new System.Drawing.Point(296, 9);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(90, 19);
             this.label20.TabIndex = 29;
@@ -952,15 +950,16 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             // panel8
             // 
+            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel8.BackColor = System.Drawing.Color.BurlyWood;
             this.panel8.Controls.Add(this.lblType);
             this.panel8.Controls.Add(this.label26);
             this.panel8.Controls.Add(this.lblConfidence);
             this.panel8.Controls.Add(this.label24);
             this.panel8.Controls.Add(this.label12);
-            this.panel8.Location = new System.Drawing.Point(664, 12);
+            this.panel8.Location = new System.Drawing.Point(896, 92);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(155, 133);
+            this.panel8.Size = new System.Drawing.Size(158, 133);
             this.panel8.TabIndex = 22;
             // 
             // lblType
@@ -1019,16 +1018,16 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel7.Controls.Add(this.lblStart);
             this.panel7.Controls.Add(this.label19);
             this.panel7.Controls.Add(this.label17);
-            this.panel7.Location = new System.Drawing.Point(15, 12);
+            this.panel7.Location = new System.Drawing.Point(21, 92);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(246, 133);
+            this.panel7.Size = new System.Drawing.Size(194, 133);
             this.panel7.TabIndex = 21;
             // 
             // lblEnd
             // 
             this.lblEnd.AutoSize = true;
             this.lblEnd.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblEnd.Location = new System.Drawing.Point(89, 97);
+            this.lblEnd.Location = new System.Drawing.Point(61, 97);
             this.lblEnd.Name = "lblEnd";
             this.lblEnd.Size = new System.Drawing.Size(71, 19);
             this.lblEnd.TabIndex = 23;
@@ -1037,7 +1036,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(84, 82);
+            this.label22.Location = new System.Drawing.Point(56, 82);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(71, 15);
             this.label22.TabIndex = 22;
@@ -1047,7 +1046,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.lblStart.AutoSize = true;
             this.lblStart.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblStart.Location = new System.Drawing.Point(97, 56);
+            this.lblStart.Location = new System.Drawing.Point(69, 56);
             this.lblStart.Name = "lblStart";
             this.lblStart.Size = new System.Drawing.Size(49, 19);
             this.lblStart.TabIndex = 21;
@@ -1057,7 +1056,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label19.Location = new System.Drawing.Point(40, 9);
+            this.label19.Location = new System.Drawing.Point(12, 9);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(169, 19);
             this.label19.TabIndex = 20;
@@ -1066,7 +1065,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(83, 41);
+            this.label17.Location = new System.Drawing.Point(55, 41);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(77, 15);
             this.label17.TabIndex = 20;
@@ -1128,21 +1127,122 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label16.Size = new System.Drawing.Size(0, 19);
             this.label16.TabIndex = 17;
             // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.BurlyWood;
+            this.panel13.Controls.Add(this.label38);
+            this.panel13.Controls.Add(this.label39);
+            this.panel13.Controls.Add(this.label40);
+            this.panel13.Controls.Add(this.label41);
+            this.panel13.Controls.Add(this.label42);
+            this.panel13.Location = new System.Drawing.Point(805, 12);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(155, 133);
+            this.panel13.TabIndex = 22;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label38.Location = new System.Drawing.Point(43, 97);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(81, 19);
+            this.label38.TabIndex = 28;
+            this.label38.Text = "..................";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(65, 82);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(30, 15);
+            this.label39.TabIndex = 27;
+            this.label39.Text = "Tipo";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label40.Location = new System.Drawing.Point(43, 56);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(78, 19);
+            this.label40.TabIndex = 26;
+            this.label40.Text = "00.0000%";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(44, 41);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(68, 15);
+            this.label41.TabIndex = 25;
+            this.label41.Text = "Confidence";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label42.Location = new System.Drawing.Point(8, 9);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(141, 19);
+            this.label42.TabIndex = 24;
+            this.label42.Text = "CARACTERISTICAS";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label33.Location = new System.Drawing.Point(27, 13);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(87, 16);
+            this.label33.TabIndex = 16;
+            this.label33.Text = "Nome do JOB:";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label34.Location = new System.Drawing.Point(24, 38);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(90, 16);
+            this.label34.TabIndex = 19;
+            this.label34.Text = "Status do JOB:";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label36.Location = new System.Drawing.Point(38, 87);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(76, 16);
+            this.label36.TabIndex = 23;
+            this.label36.Text = "Linguagem: ";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label37.Location = new System.Drawing.Point(73, 112);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(41, 16);
+            this.label37.TabIndex = 25;
+            this.label37.Text = "Herz: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 681);
+            this.ClientSize = new System.Drawing.Size(1115, 693);
             this.Controls.Add(this.panelExibicao);
             this.Controls.Add(this.panelMenu);
             this.Name = "Form1";
             this.Text = "Transcribe Speech To Text";
             this.panelMenu.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarStateAudio)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panelExibicao.ResumeLayout(false);
             this.tabControlBody.ResumeLayout(false);
             this.tabPageFile.ResumeLayout(false);
@@ -1156,16 +1256,20 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel11.PerformLayout();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            this.tabGerenciarTranscricao.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.tabPageAudio.ResumeLayout(false);
             this.tabPageAudio.PerformLayout();
             this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1212,11 +1316,9 @@ namespace Amazon_Transcribe_Speech_To_Text
         private System.Windows.Forms.Label lblFormat;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblStatusJob;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lblNameJob;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TabPage tabPageAudio;
-        private System.Windows.Forms.Button btnLoadTranscription;
+        private System.Windows.Forms.Button btnLoadLastTranscription;
         private System.Windows.Forms.Label s;
         private System.Windows.Forms.Label lblFormatMidia;
         private System.Windows.Forms.Label b;
@@ -1243,24 +1345,18 @@ namespace Amazon_Transcribe_Speech_To_Text
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TextBox txtContent;
         private System.Windows.Forms.ComboBox cbAlternative;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button btnAddContent;
-        private System.Windows.Forms.Label lblNumItem;
-        private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnReGerar;
         private System.Windows.Forms.Label lblLanguage;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label lblHertz;
-        private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnLoadTranscription;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Label label32;
@@ -1268,6 +1364,22 @@ namespace Amazon_Transcribe_Speech_To_Text
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.ComboBox cbFilesBucket;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.TabPage tabGerenciarTranscricao;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label lblContentActual;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label33;
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using Amazon.TranscribeService;
 using Amazon.TranscribeService.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Interface
        public void setJobProperties(TranscriptionJob transcriptionJob, int incrementProgrees);
         public void displayTotalTime(TimeSpan totalTime);
         public void bindTextContent(List<Models.Entity.Transcript> contentText);
-        public void displayTrancribe(Item item);
+        public void displayTrancribe(Item item, Segment segment = null);
         public void displayStatusCurrentProgress(TimeSpan currentAudio);
         public bool updateComboNameJobs(List<TranscriptionJobSummary> jobsSummary);
     }

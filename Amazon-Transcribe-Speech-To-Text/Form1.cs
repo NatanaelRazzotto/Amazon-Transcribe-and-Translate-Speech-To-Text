@@ -3,6 +3,8 @@ using Amazon.TranscribeService.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys.segments;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
@@ -99,11 +101,27 @@ namespace Amazon_Transcribe_Speech_To_Text
             controller.executeTranscribeToS3();
         }
 
-        private void btnLoadTranscription_Click(object sender, EventArgs e)
+        private void btnLoadLastTranscription_Click(object sender, EventArgs e)
         {
             controller.TranscribeObject();
             tabControlBody.SelectedIndex = 1;
             panel2.Enabled = true;
+        }
+        private void btnLoadTranscription_Click(object sender, EventArgs e)
+        {
+            controller.TranscribeObject();//TranscribeObjectSelected();
+            tabControlBody.SelectedIndex = 1;
+            panel2.Enabled = true;
+        }
+
+        private void cbJobTranscribe_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectTranscribe = cbJobTranscribe.SelectedItem.ToString();
+            if (!string.IsNullOrEmpty(selectTranscribe))
+            {
+                controller.getTranscriptInformation(selectTranscribe);
+            }
+
         }
 
         private void trackBarStateAudio_ValueChanged(object sender, EventArgs e)
@@ -281,22 +299,38 @@ namespace Amazon_Transcribe_Speech_To_Text
             richTextBox1.Text = contentText.ElementAt(0).transcript;
         }
 
-        public async void displayTrancribe(Item item)
+        public async void displayTrancribe(Item item, Segment segment = null)
         {
             if (item != null)
             {
                 lblStart.Text = item.start_time.ToString();
                 lblEnd.Text = item.end_time.ToString();
-                if (item.alternatives.Count != 0)
+
+                if (segment != null)
                 {
-                    cbAlternative.Items.Clear();
-                    foreach (Alternatives alternative in item.alternatives)
+                    if (segment.alternatives.Count != 0)
                     {
-                        cbAlternative.Items.Add($"{alternative.content} - Confidence: {alternative.confidence.ToString("F")}%");
+                        cbAlternative.Items.Clear();
+                        foreach (AlternativeSegment alternative in segment.alternatives)
+                        {
+                            cbAlternative.Items.Add($"{alternative.transcript}"); // - Confidence: {alternative.confidence.ToString("F")}%");
+                        }
                     }
-                    cbAlternative.SelectedIndex = 0;
-                    txtContent.Text = item.alternatives.ElementAt(0).content;
                 }
+
+                cbAlternative.SelectedIndex = 0;
+               // txtContent.Text = item.alternatives.ElementAt(0).content;
+                lblContentActual.Text = item.alternatives.ElementAt(0).content;
+                /* if (item.alternatives.Count != 0)
+                 {
+                     cbAlternative.Items.Clear();
+                     foreach (Alternatives alternative in item.alternatives)
+                     {
+                         cbAlternative.Items.Add($"{alternative.content} - Confidence: {alternative.confidence.ToString("F")}%");
+                     }
+                     cbAlternative.SelectedIndex = 0;
+                     txtContent.Text = item.alternatives.ElementAt(0).content;
+                 }*/
                 lblConfidence.Text = $"{item.averageConfidence}%";
                 lblType.Text = item.type;
             }
@@ -324,5 +358,7 @@ namespace Amazon_Transcribe_Speech_To_Text
         {
 
         }
+
+
     }
 }

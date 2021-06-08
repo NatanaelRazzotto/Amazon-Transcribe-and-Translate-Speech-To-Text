@@ -1,5 +1,7 @@
 ﻿using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys.segments;
 using AWS_Rekognition_Objects.Helpers.Model;
 using NAudio.Wave;
 using Newtonsoft.Json;
@@ -20,18 +22,19 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
         private AWSS3Service awsS3Service;
         private AWSTranscribeService awsTranscribeService;
         private AWSUtil awsUtil;
-        public SpeechToText(Controller Controller, AWSS3Service awsS3Service, AWSTranscribeService awsTranscribeService, AWSUtil awsUtil) {
+        public SpeechToText(Controller Controller, AWSUtil awsUtil) {
             this.Controller = Controller;
-            this.awsS3Service = awsS3Service;
-            this.awsTranscribeService = awsTranscribeService;
             this.awsUtil = awsUtil;
+            this.awsS3Service = new AWSS3Service();
+            this.awsTranscribeService = new AWSTranscribeService(Controller);
+
             this.playerMedia = new PlayerMedia(this.Controller);
             setNewFileFromExecuteTrasncribe();
         }
         public async void setNewFileFromExecuteTrasncribe() {
             //this.transcribed = new Transcribed();
 
-            bool checkFile = await playerMedia.newFileAudio(awsUtil.FileNameActual);
+            bool checkFile = await playerMedia.newFileAudio(awsUtil);
             if (checkFile)
             {
                 string jsonString = await awsS3Service.getObjectTranscribeS3(awsUtil);
@@ -88,7 +91,8 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
                     await Task.Delay(1000);
                     TimeSpan currentAudio = playerMedia.getCurrentTime();
                     Item item = getTextFromSpeach(currentAudio);
-                    await Controller.displayParametersCurrents(currentAudio, item);                    
+                    Segment segment = getSegmentFromTime(currentAudio);
+                    await Controller.displayParametersCurrents(currentAudio, item, segment);                    
                 }
                 else if (statePlayback == PlaybackState.Paused)
                 {
@@ -102,6 +106,12 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             Item itemSelect = items.Find(x => (x.start_time <= timeCurrent.TotalSeconds) && (x.end_time >= timeCurrent.TotalSeconds));
             return itemSelect;
 
+        }
+        public Segment getSegmentFromTime(TimeSpan timeCurrent)
+        {
+            List<Segment> Segments = transcribed.results.Segments;
+            Segment segmentContent = Segments.Find(x => (x.start_time <= timeCurrent.TotalSeconds) && (x.end_time >= timeCurrent.TotalSeconds));
+            return segmentContent;
         }
         public List<Transcript> regenerate()
         {
@@ -174,6 +184,28 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             }
             
             return itemSelect;
+        }
+
+        public Item actualizarContentTempo(double valueStart, double valueEnd, int indexSelect)
+        {
+            List<Item> items = transcribed.results.items;
+            List<Segment> Segments = transcribed.results.Segments;
+            Segment segmentContent = Segments.Find(x => (x.start_time <= valueStart) && (x.end_time >= valueEnd));
+            AlternativeSegment alternativeSegment = segmentContent.alternatives.ElementAt(indexSelect);
+
+
+            foreach (var alternative in alternativeSegment.items)
+            {
+                foreach (var item in items)
+                {
+                    if ((item.start_time == alternative.start_time) && (item.end_time == alternative.end_time))
+                    {
+                        item.alternatives.ElementAt(0).content = alternative.content;
+                        return item;
+                    }
+                }
+            }
+            return null;
         }
 
         public Item removeContentItem(double valueStart, double valueEnd, int indexSelect)

@@ -1,4 +1,5 @@
 ﻿using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
 {
     public class PlayerMedia
     {
+        private AWSS3Service awsS3Sevices;
         private Mp3FileReader mp3Reader;
         private WaveOutEvent outputDevice;
         private AudioFileReader audioFile;
@@ -22,6 +24,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
 
         public PlayerMedia(IController controller) {
             this.controller = controller;
+            this.awsS3Sevices = new AWSS3Service();
         }
 
         public bool checkExecute() {
@@ -41,7 +44,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             return (executeMedia == false) ? true : false;
         }
 
-        public async Task<bool> newFileAudio(string fileName)
+        public async Task<bool> newFileAudio(AWSUtil file)
         {
             if (outputDevice == null)
             {
@@ -50,7 +53,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             }
             if (mp3Reader == null)
             {
-                string path = searchFile(fileName);
+                string path = searchFile(file);
                 if (!string.IsNullOrEmpty(path))
                 {
                     mp3Reader = new Mp3FileReader(path);
@@ -59,14 +62,39 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
                 }
                 else
                 {
-                    MessageBox.Show("Não foi encontrado o arquivo");
-                    return false;
+                    DialogResult dialogResult = MessageBox.Show("Download", "Arquivo não encontrado! Deseja Baixa-lo?",
+                                                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string downloadPath = await awsS3Sevices.DownloadFileS3(file);
+                        if (!string.IsNullOrEmpty(downloadPath)) {
+                           /* string pathNewFile = searchFile(file);
+                            if (!string.IsNullOrEmpty(path))
+                            {*/
+                                mp3Reader = new Mp3FileReader(downloadPath);
+                                outputDevice.Init(mp3Reader);
+                                return true;
+                           // }
+                        }
+                        else
+                        {
+                            MessageBox.Show("O arquivo não foi baixado");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("O arquivo não foi baixado");
+                        return false;
+                    }
+
+
                 }
             }
             return false;
 
         }
-        private string searchFile(string fileName) {
+        private string searchFile(AWSUtil file) {
             string pathAudios = @"..\..\..\Audios";
             if (Directory.Exists(pathAudios))
             {
@@ -76,7 +104,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
                 for (int i = 0; i < arquivos.Length; i++)
                 {
                     string nameFileList = Path.GetFileName(arquivos[i]);
-                    if (fileName == nameFileList)
+                    if (file.FileNameActual == nameFileList)
                     {
                         return arquivos[i];
                     }

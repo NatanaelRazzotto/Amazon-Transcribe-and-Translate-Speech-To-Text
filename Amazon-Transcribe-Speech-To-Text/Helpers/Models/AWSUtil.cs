@@ -12,7 +12,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         private string bucketNameOutput;
         private string fileNameActual;
         private string newFileName;
-        private string jobName;
+        private string jobName = "Transcribe-MediaFile-20212801092827.json";
 
         private List<string> ListExistingImagesBucket;
 

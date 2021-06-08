@@ -20,6 +20,11 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
         private AmazonTranscribeServiceClient transcribeClient;
         private static readonly RegionEndpoint region = RegionEndpoint.USEast1;
         private IController controller;
+
+        public AWSTranscribeService(IController controller) {
+            this.controller = controller;
+        }
+
         public bool GetCredentialsAWS()
         {
             CredentialProfileStoreChain credentialProfileChain = new CredentialProfileStoreChain();
@@ -85,6 +90,26 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
                         await Task.Delay(5000);
                     }
                 }
+            }
+        }
+        public async Task<GetTranscriptionJobResponse> requestGetPropertsTranscribe(string transcribeJobName)
+        {
+            try
+            {
+                if (TranscribeClient())
+                {
+                    GetTranscriptionJobRequest jobStatus = new GetTranscriptionJobRequest()
+                    {
+                        TranscriptionJobName = transcribeJobName,
+                    };
+                    GetTranscriptionJobResponse jobDataTranscribe = await transcribeClient.GetTranscriptionJobAsync(jobStatus);
+                    return jobDataTranscribe;
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
