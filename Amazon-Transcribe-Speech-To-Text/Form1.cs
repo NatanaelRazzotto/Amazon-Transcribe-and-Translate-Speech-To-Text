@@ -359,6 +359,24 @@ namespace Amazon_Transcribe_Speech_To_Text
 
         }
 
+        public void bindMenuTranslate(LanguageCode languageCode, List<string> languageCodes)
+        {
+            lblIdiomaIdentificado.Text = languageCode;
+            languageCodes.ForEach( language => cbxIdiomas.Items.Add(language.ToString()));
+        }
 
+        private void btnTraduzir_Click(object sender, EventArgs e)
+        {
+            int selectIdiomaTranscribe = cbJobTranscribe.SelectedIndex;
+            if (selectIdiomaTranscribe >= 0) {
+                controller.TranslateFromIdioma(selectIdiomaTranscribe);
+            }
+        }
+
+        public void bindTextTranslator(string translatedText)
+        {
+            rcbTraduzido.Clear();
+            rcbTraduzido.AppendText(translatedText);
+        }
     }
 }

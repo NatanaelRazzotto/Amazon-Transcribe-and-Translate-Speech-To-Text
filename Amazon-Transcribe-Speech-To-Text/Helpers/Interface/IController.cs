@@ -12,7 +12,8 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Interface
     public interface IController
     {
         public void ViewStatusofTranscriptJob(TranscriptionJob transcriptionJob, int incrementProgrees);
-        public void displayParametersInitials(TimeSpan totalTime, List<Models.Entity.Transcript> contentText);
+        public void displayParametersInitials(TimeSpan totalTime, List<Models.Entity.Transcript> contentText, TranscriptionJob transcriptionJob);
         public Task displayParametersCurrents(TimeSpan currentAudio, Item item , Segment segment);
+        void setTranscribedEditTranslator(string translatedText);
     }
 }

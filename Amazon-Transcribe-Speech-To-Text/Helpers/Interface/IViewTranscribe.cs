@@ -22,5 +22,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Interface
         public void displayTrancribe(Item item, Segment segment = null);
         public void displayStatusCurrentProgress(TimeSpan currentAudio);
         public bool updateComboNameJobs(List<TranscriptionJobSummary> jobsSummary);
+        void bindMenuTranslate(LanguageCode languageCode, List<string> languageCodes);
+        void bindTextTranslator(string translatedText);
     }
 }

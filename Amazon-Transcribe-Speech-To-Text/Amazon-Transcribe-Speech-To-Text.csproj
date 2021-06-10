@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.7.0.22" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.0.30" />
     <PackageReference Include="AWSSDK.TranscribeService" Version="3.7.2.16" />
     <PackageReference Include="AWSSDK.Translate" Version="3.7.0.29" />
     <PackageReference Include="NAudio" Version="2.0.0" />
@@ -28,6 +29,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\Models\Entity\TranslateEntitys\" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,10 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         private string bucketNameOutput;
         private string fileNameActual;
         private string newFileName;
+        private string folderActual;
         private string jobName = "Transcribe-MediaFile-20212801092827.json";
+        private string idiomaEntrada;
+        private string idiomaSaida;
 
         private List<string> ListExistingImagesBucket;
 
@@ -30,6 +33,23 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         {
             get => fileNameActual;
             set => fileNameActual = value;
+        }
+        public string FolderActual
+        {
+            get => folderActual;
+            set => folderActual = value;
+        }
+
+        public string IdiomaEntrada
+        {
+            get => idiomaEntrada;
+            set => idiomaEntrada = value;
+        }
+
+        public string IdiomaSaida
+        {
+            get => idiomaSaida;
+            set => idiomaSaida = value;
         }
 
         public string JobName

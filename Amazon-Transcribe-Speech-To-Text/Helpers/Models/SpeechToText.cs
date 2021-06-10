@@ -1,4 +1,6 @@
-﻿using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
+﻿using Amazon.TranscribeService.Model;
+using Amazon.Translate.Model;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys.segments;
@@ -19,14 +21,18 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
         //AWSServices awsServices;
         PlayerMedia playerMedia;
         Transcribed transcribed;
+        
         private AWSS3Service awsS3Service;
         private AWSTranscribeService awsTranscribeService;
+        private AWSTranslateService translateService;
         private AWSUtil awsUtil;
-        public SpeechToText(Controller Controller, AWSUtil awsUtil) {
+        private TranscriptionJob transcriptionJob;
+        public SpeechToText(Controller Controller, AWSUtil awsUtil, TranscriptionJob transcriptionJob) {
             this.Controller = Controller;
             this.awsUtil = awsUtil;
             this.awsS3Service = new AWSS3Service();
             this.awsTranscribeService = new AWSTranscribeService(Controller);
+            this.transcriptionJob = transcriptionJob;
 
             this.playerMedia = new PlayerMedia(this.Controller);
             setNewFileFromExecuteTrasncribe();
@@ -44,7 +50,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
                     TimeSpan TotalTime = playerMedia.getTotalTimeAudio();
                     ResultsTranscribed results = transcribed.results;
                     setAverageConfidenceItem(results.items);
-                    Controller.displayParametersInitials(TotalTime, results.transcripts);
+                    Controller.displayParametersInitials(TotalTime, results.transcripts, transcriptionJob);
                 }
             }
         }
@@ -206,6 +212,19 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
                 }
             }
             return null;
+        }
+
+        public async void TranslateTextFromAudio(string selectedIdioma)
+        {
+            Transcript results = transcribed.results.transcripts.ElementAt(0);
+
+            ///Dividir string ou usar um lambda?
+
+            translateService = new AWSTranslateService();
+            TranslateTextResponse translateTextResponse = await translateService.PreparToTranslate(results.transcript, transcriptionJob.LanguageCode, selectedIdioma);
+            Controller.setTranscribedEditTranslator(translateTextResponse.TranslatedText);
+            // TODO IMPLEMRNTAÇÃO ITEM DE RETORNO TRADUZIDO
+
         }
 
         public Item removeContentItem(double valueStart, double valueEnd, int indexSelect)

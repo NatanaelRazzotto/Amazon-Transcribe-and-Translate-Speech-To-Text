@@ -23,9 +23,12 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         private AWSS3Service awsS3Service;
         private AWSTranscribeService transcribeService;
         private AWSUtil awsUtil;
-
+        private TranscriptionJob transcriptionJob;
         private PlayerMedia playerMedia;
         private SpeechToText speechToText;
+        private List<string> LanguageCodes = new List<string>() { "en", "ar", "cs", "de", "es", "fr", "it",
+                                                                    "ja", "pt", "ru", "tr", "zh", "zh-TW" };
+
 
         public Controller(IViewTranscribe formTranscribe)
         {
@@ -64,10 +67,12 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             }
         }
 
-        public void displayParametersInitials(TimeSpan totalTime, List<Entity.Transcript> contentText)
+        public void displayParametersInitials(TimeSpan totalTime, List<Entity.Transcript> contentText, TranscriptionJob transcriptionJob)
         {
             formTranscribe.displayTotalTime(totalTime);
             formTranscribe.bindTextContent(contentText);
+            formTranscribe.bindMenuTranslate(transcriptionJob.LanguageCode, LanguageCodes);
+
         }
 
         public async Task displayParametersCurrents(TimeSpan currentAudio, Item item, Segment segment) {
@@ -125,7 +130,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
 
         public void TranscribeObject()
         {
-            speechToText = new SpeechToText(this,awsUtil);
+            speechToText = new SpeechToText(this,awsUtil,transcriptionJob);
 
         }
         public async void getTranscriptInformation(string selectTranscribe)
@@ -133,7 +138,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             GetTranscriptionJobResponse getTranscriptionJob = await transcribeService.requestGetPropertsTranscribe(selectTranscribe);
             if (getTranscriptionJob.HttpStatusCode == System.Net.HttpStatusCode.OK)
             {
-                TranscriptionJob transcriptionJob = getTranscriptionJob.TranscriptionJob;
+                transcriptionJob = getTranscriptionJob.TranscriptionJob;
                 string transcriptURL = transcriptionJob.Transcript.TranscriptFileUri;
                 awsUtil.JobName = Path.GetFileName(transcriptURL);
                 string mediaURL = transcriptionJob.Media.MediaFileUri;
@@ -182,6 +187,17 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         public void genarateNewContent() {
             List<Entity.Transcript> contentText = speechToText.regenerate();
             formTranscribe.bindTextContent(contentText);
+        }
+
+        public void TranslateFromIdioma(int selectIdiomaTranscribe)
+        {
+            string selectedIdioma = LanguageCodes.ElementAt(selectIdiomaTranscribe);
+            speechToText.TranslateTextFromAudio(selectedIdioma);
+        }
+
+        public void setTranscribedEditTranslator(string translatedText)
+        {
+            formTranscribe.bindTextTranslator(translatedText);
         }
 
 
