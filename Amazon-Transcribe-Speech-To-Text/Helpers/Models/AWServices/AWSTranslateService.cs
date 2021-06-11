@@ -6,6 +6,7 @@ using Amazon.Translate.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,11 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
         private AmazonTranslateClient transcribeClient;
         private static readonly RegionEndpoint region = RegionEndpoint.USEast1;
         private IController controller;
+      //  private AWSUtil awsUtilService;
+        public AWSTranslateService(IController controller) {
+            this.controller = controller;
+        }
+
         public bool GetCredentialsAWS()
         {
             CredentialProfileStoreChain credentialProfileChain = new CredentialProfileStoreChain();
@@ -39,7 +45,67 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             }
             return false;
         }
-        public async Task<TranslateTextResponse> PreparToTranslate(string translate, string SourceLanguage, string TargetLanguage) {
+        public async Task<TranslateTextResponse> requestExecuteTranslate(string translate, AWSUtil awsUtilService) {
+
+            TranslateTextResponse translateTextResponse = new TranslateTextResponse();
+            AWSS3Service awsS3Service = new AWSS3Service();
+            byte[] byteArray = Encoding.UTF8.GetBytes(translate);
+            awsUtilService.FolderActual = await awsS3Service.UploadFileFromS3(byteArray, "txt", awsUtilService);
+            StartTextTranslationJobResponse startTextTranslationJobResponse = await ExecuteJobTranslate(awsUtilService);
+
+            if (startTextTranslationJobResponse.HttpStatusCode == System.Net.HttpStatusCode.OK)
+            {
+                bool runningJobStatus = true;
+                int incrementProgree = 0;
+                while (runningJobStatus)
+                {
+                    TextTranslationJobProperties textTranslationJobProperties = await GetDescribeJobTranslate(startTextTranslationJobResponse);
+                    if (textTranslationJobProperties.JobStatus == JobStatus.COMPLETED)
+                    {
+                        string pathURL = Path.GetFileName(textTranslationJobProperties.OutputDataConfig.S3Uri);
+                        translateTextResponse.TranslatedText = await awsS3Service.DownloadFileAsync(pathURL, awsUtilService);
+                        incrementProgree = 100;
+                        runningJobStatus = false;
+                    }
+                    else if (textTranslationJobProperties.JobStatus == JobStatus.SUBMITTED)
+                    {
+                        controller.ViewStatusofTranslateJob(textTranslationJobProperties, incrementProgree);
+                        if (incrementProgree > 80)
+                        {
+                            incrementProgree = 0;
+                        }
+                        else
+                        {
+                            incrementProgree += 5;
+                        }
+
+                        await Task.Delay(5000);
+                    }
+                    else if (textTranslationJobProperties.JobStatus == JobStatus.IN_PROGRESS)
+                    {
+                        controller.ViewStatusofTranslateJob(textTranslationJobProperties, incrementProgree);
+                        if (incrementProgree > 80)
+                        {
+                            incrementProgree = 0;
+                        }
+                        else
+                        {
+                            incrementProgree += 5;
+                        }
+
+                        await Task.Delay(9000);
+                    }
+
+                }
+            }
+
+            return translateTextResponse;
+
+        }
+        
+
+        [Obsolete ("Method substituido por jobs")]
+        public async Task<TranslateTextResponse> PreparToTranslateLimited(string translate, string SourceLanguage, string TargetLanguage) {
 
             TranslateTextResponse translateTextResponse = new TranslateTextResponse();
 
@@ -97,6 +163,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
                 {
                     StartTextTranslationJobRequest startTextTranslationJobRequest = new StartTextTranslationJobRequest
                     {
+                        DataAccessRoleArn = "arn:aws:iam::308881334884:role/service-role/AmazonTranslateServiceRole-AWSTranscriptionAndTranslates",
                         InputDataConfig = new InputDataConfig
                         {
                             S3Uri = $"s3://{awsUtilProperts.BucketNameInput}/{awsUtilProperts.FolderActual}",
@@ -119,6 +186,26 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             }
         }
 
+        public async Task<TextTranslationJobProperties> GetDescribeJobTranslate(StartTextTranslationJobResponse startTextTranslationJobResponse)
+        {
+            try
+            {
+                if (TranscribeClient())
+                {
+                    DescribeTextTranslationJobRequest TranslationJobRequest = new DescribeTextTranslationJobRequest
+                    {
+                        JobId = startTextTranslationJobResponse.JobId,
+                    };
+                    DescribeTextTranslationJobResponse TranslationJobResponse = await transcribeClient.DescribeTextTranslationJobAsync(TranslationJobRequest);
+                    return TranslationJobResponse.TextTranslationJobProperties;
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

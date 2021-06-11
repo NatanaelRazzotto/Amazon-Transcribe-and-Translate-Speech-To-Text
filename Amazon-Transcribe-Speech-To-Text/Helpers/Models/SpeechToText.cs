@@ -220,11 +220,34 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
 
             ///Dividir string ou usar um lambda?
 
-            translateService = new AWSTranslateService();
-            TranslateTextResponse translateTextResponse = await translateService.PreparToTranslate(results.transcript, transcriptionJob.LanguageCode, selectedIdioma);
+            translateService = new AWSTranslateService(Controller);
+            TranslateTextResponse translateTextResponse = await PreparToTranslate(results.transcript, transcriptionJob.LanguageCode, selectedIdioma);
             Controller.setTranscribedEditTranslator(translateTextResponse.TranslatedText);
             // TODO IMPLEMRNTAÇÃO ITEM DE RETORNO TRADUZIDO
 
+        }
+
+
+        public async Task<TranslateTextResponse> PreparToTranslate(string translate, string SourceLanguage, string TargetLanguage)
+        {
+
+            TranslateTextResponse translateTextResponse = new TranslateTextResponse();
+
+            string[] codLanguage = SourceLanguage.Split("-");
+            int lenghtStringTranslate = translate.Length;
+            awsUtil.IdiomaEntrada = codLanguage[0];
+            awsUtil.IdiomaSaida = TargetLanguage;
+
+            if (lenghtStringTranslate >= 5000)
+            {
+                translateTextResponse = await translateService.requestExecuteTranslate(translate, awsUtil);
+                return translateTextResponse;
+            }
+            else
+            {
+                translateTextResponse = await translateService.TranslateText(translate, codLanguage[0], TargetLanguage);
+                return translateTextResponse;
+            }
         }
 
         public Item removeContentItem(double valueStart, double valueEnd, int indexSelect)

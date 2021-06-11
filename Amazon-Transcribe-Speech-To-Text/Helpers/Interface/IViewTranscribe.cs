@@ -1,5 +1,6 @@
 ﻿using Amazon.TranscribeService;
 using Amazon.TranscribeService.Model;
+using Amazon.Translate.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
 using System;
@@ -24,5 +25,6 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Interface
         public bool updateComboNameJobs(List<TranscriptionJobSummary> jobsSummary);
         void bindMenuTranslate(LanguageCode languageCode, List<string> languageCodes);
         void bindTextTranslator(string translatedText);
+        void setJobPropertiesTranslate(TextTranslationJobProperties transcriptionJob, int incrementProgrees);
     }
 }

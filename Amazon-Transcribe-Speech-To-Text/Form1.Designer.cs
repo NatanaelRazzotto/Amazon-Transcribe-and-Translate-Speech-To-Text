@@ -91,6 +91,19 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label5 = new System.Windows.Forms.Label();
             this.tabGerenciarTranscricao = new System.Windows.Forms.TabPage();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.pgbAnalizerTranslate = new System.Windows.Forms.ProgressBar();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.lblJobIdioma = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.lblJobStatusTranslate = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.lblJobNameTranslate = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.btnPolly = new System.Windows.Forms.Button();
+            this.cbxPolly = new System.Windows.Forms.ComboBox();
+            this.label48 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -143,7 +156,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
-            this.panel15 = new System.Windows.Forms.Panel();
             this.panelMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -158,6 +170,8 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel10.SuspendLayout();
             this.tabGerenciarTranscricao.SuspendLayout();
             this.panel12.SuspendLayout();
+            this.panel16.SuspendLayout();
+            this.panel15.SuspendLayout();
             this.panel14.SuspendLayout();
             this.tabPageAudio.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -827,6 +841,8 @@ namespace Amazon_Transcribe_Speech_To_Text
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel12.BackColor = System.Drawing.Color.Tan;
+            this.panel12.Controls.Add(this.pgbAnalizerTranslate);
+            this.panel12.Controls.Add(this.panel16);
             this.panel12.Controls.Add(this.panel15);
             this.panel12.Controls.Add(this.label46);
             this.panel12.Controls.Add(this.label44);
@@ -840,6 +856,139 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(1091, 443);
             this.panel12.TabIndex = 0;
+            // 
+            // pgbAnalizerTranslate
+            // 
+            this.pgbAnalizerTranslate.Location = new System.Drawing.Point(520, 282);
+            this.pgbAnalizerTranslate.Name = "pgbAnalizerTranslate";
+            this.pgbAnalizerTranslate.Size = new System.Drawing.Size(187, 23);
+            this.pgbAnalizerTranslate.TabIndex = 45;
+            // 
+            // panel16
+            // 
+            this.panel16.BackColor = System.Drawing.Color.BurlyWood;
+            this.panel16.Controls.Add(this.lblJobIdioma);
+            this.panel16.Controls.Add(this.label53);
+            this.panel16.Controls.Add(this.lblJobStatusTranslate);
+            this.panel16.Controls.Add(this.label51);
+            this.panel16.Controls.Add(this.lblJobNameTranslate);
+            this.panel16.Controls.Add(this.label49);
+            this.panel16.Controls.Add(this.label47);
+            this.panel16.Location = new System.Drawing.Point(739, 292);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(333, 137);
+            this.panel16.TabIndex = 44;
+            // 
+            // lblJobIdioma
+            // 
+            this.lblJobIdioma.AutoSize = true;
+            this.lblJobIdioma.Location = new System.Drawing.Point(171, 93);
+            this.lblJobIdioma.Name = "lblJobIdioma";
+            this.lblJobIdioma.Size = new System.Drawing.Size(106, 15);
+            this.lblJobIdioma.TabIndex = 49;
+            this.lblJobIdioma.Text = "Audio Selecionado";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label53.Location = new System.Drawing.Point(78, 92);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(92, 16);
+            this.label53.TabIndex = 48;
+            this.label53.Text = "Idioma do JOB:";
+            // 
+            // lblJobStatusTranslate
+            // 
+            this.lblJobStatusTranslate.AutoSize = true;
+            this.lblJobStatusTranslate.Location = new System.Drawing.Point(171, 68);
+            this.lblJobStatusTranslate.Name = "lblJobStatusTranslate";
+            this.lblJobStatusTranslate.Size = new System.Drawing.Size(106, 15);
+            this.lblJobStatusTranslate.TabIndex = 47;
+            this.lblJobStatusTranslate.Text = "Audio Selecionado";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label51.Location = new System.Drawing.Point(78, 67);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(90, 16);
+            this.label51.TabIndex = 46;
+            this.label51.Text = "Status do JOB:";
+            // 
+            // lblJobNameTranslate
+            // 
+            this.lblJobNameTranslate.AutoSize = true;
+            this.lblJobNameTranslate.Location = new System.Drawing.Point(171, 43);
+            this.lblJobNameTranslate.Name = "lblJobNameTranslate";
+            this.lblJobNameTranslate.Size = new System.Drawing.Size(106, 15);
+            this.lblJobNameTranslate.TabIndex = 45;
+            this.lblJobNameTranslate.Text = "Audio Selecionado";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label49.Location = new System.Drawing.Point(78, 43);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(87, 16);
+            this.label49.TabIndex = 44;
+            this.label49.Text = "Nome do JOB:";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label47.Location = new System.Drawing.Point(67, 15);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(215, 19);
+            this.label47.TabIndex = 43;
+            this.label47.Text = "TRANSLATE PROPRIEDADES";
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.Color.BurlyWood;
+            this.panel15.Controls.Add(this.btnPolly);
+            this.panel15.Controls.Add(this.cbxPolly);
+            this.panel15.Controls.Add(this.label48);
+            this.panel15.Location = new System.Drawing.Point(739, 145);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(333, 121);
+            this.panel15.TabIndex = 43;
+            // 
+            // btnPolly
+            // 
+            this.btnPolly.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPolly.BackgroundImage")));
+            this.btnPolly.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPolly.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPolly.Location = new System.Drawing.Point(229, 47);
+            this.btnPolly.Name = "btnPolly";
+            this.btnPolly.Size = new System.Drawing.Size(53, 45);
+            this.btnPolly.TabIndex = 45;
+            this.btnPolly.UseVisualStyleBackColor = true;
+            this.btnPolly.Click += new System.EventHandler(this.btnPolly_Click);
+            // 
+            // cbxPolly
+            // 
+            this.cbxPolly.BackColor = System.Drawing.Color.NavajoWhite;
+            this.cbxPolly.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbxPolly.FormattingEnabled = true;
+            this.cbxPolly.Location = new System.Drawing.Point(39, 59);
+            this.cbxPolly.Name = "cbxPolly";
+            this.cbxPolly.Size = new System.Drawing.Size(156, 23);
+            this.cbxPolly.TabIndex = 43;
+            this.cbxPolly.SelectedIndexChanged += new System.EventHandler(this.cbxPolly_SelectedIndexChanged);
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label48.Location = new System.Drawing.Point(62, 16);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(220, 19);
+            this.label48.TabIndex = 44;
+            this.label48.Text = "OUVIR TRADUÇÃO COM POLLY";
             // 
             // label46
             // 
@@ -1389,14 +1538,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label45.TabIndex = 42;
             this.label45.Text = "MO";
             // 
-            // panel15
-            // 
-            this.panel15.BackColor = System.Drawing.Color.BurlyWood;
-            this.panel15.Location = new System.Drawing.Point(739, 145);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(333, 81);
-            this.panel15.TabIndex = 43;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1428,6 +1569,10 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.tabGerenciarTranscricao.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
             this.tabPageAudio.ResumeLayout(false);
@@ -1565,6 +1710,21 @@ namespace Amazon_Transcribe_Speech_To_Text
         private System.Windows.Forms.Button btnTraduzir;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Panel panel15;
+        private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.Label lblJobStatusTranslate;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label lblJobNameTranslate;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.ProgressBar pgbAnalizerTranslate;
+        private System.Windows.Forms.Label lblJobIdioma;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label l;
+        private System.Windows.Forms.Label lb;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox cbxPolly;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Button btnPolly;
     }
 }
 

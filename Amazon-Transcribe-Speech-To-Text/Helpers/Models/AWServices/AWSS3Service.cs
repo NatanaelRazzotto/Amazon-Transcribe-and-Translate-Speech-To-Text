@@ -110,6 +110,75 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             }
 
         }
+        public async Task<string> UploadFileFromS3(byte[] content, string extension, AWSUtil awsUtilService)
+        {
+            try
+            {
+                if (S3Client())
+                {
+                    TransferUtility fileTransferUtility = new TransferUtility(s3Client);
+
+                    string key = Guid.NewGuid().ToString();
+
+                    TransferUtilityUploadRequest transferRequest = new TransferUtilityUploadRequest
+                    {
+                        Key = $"FilesTranslate-{key}/{key}.{extension}",
+                        BucketName = awsUtilService.BucketNameInput,
+                        ContentType = $"text/{extension}",
+                        InputStream = new MemoryStream(content),
+                    };
+
+                    await fileTransferUtility.UploadAsync(transferRequest);
+                    return "FilesTranslate-"+ key;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (AmazonS3Exception ex)
+            {
+                throw new ApplicationException($"Erro encontrado no servidor, ao escrever objeto { ex.Message} ");
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Erro encontrado no servidor, ao escrever objeto { ex.Message} ");
+            }
+        }
+
+        public async Task<string> DownloadFileAsync(string fileRoute, AWSUtil awsUtilService)
+        {
+            try
+            {
+                string stringTranslate = "";
+                if (S3Client())
+                {
+                    GetObjectRequest getObjectRequest = new GetObjectRequest
+                    {
+                        BucketName = awsUtilService.BucketNameOutput,
+                        Key = fileRoute,
+                    };
+                    GetObjectResponse objectResponse = await s3Client.GetObjectAsync(getObjectRequest);
+                    if (objectResponse.HttpStatusCode == HttpStatusCode.NotFound)
+                    {
+                        throw new Exception("O Arquivo não foi encontrado.");
+                    }
+                    MemoryStream result = new MemoryStream();
+                    Stream responseFileStream = objectResponse.ResponseStream;
+                    StreamReader reader = new StreamReader(responseFileStream);
+                    responseFileStream.CopyTo(result);
+                    stringTranslate = Encoding.UTF8.GetString(result.ToArray());
+
+                }
+                return stringTranslate;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Ocorreu um erro ao obter o arquivo do Storage.");
+            }
+        }
+
+
         public List<string> audioInputBucketNames(AWSUtil awsUtilProperts)
         {
             awsUtilProperts.ExistingImagesBucket = new List<string>();

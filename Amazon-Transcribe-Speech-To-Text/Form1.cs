@@ -1,5 +1,7 @@
-﻿using Amazon.TranscribeService;
+﻿using Amazon.Polly.Model;
+using Amazon.TranscribeService;
 using Amazon.TranscribeService.Model;
+using Amazon.Translate.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
@@ -258,6 +260,14 @@ namespace Amazon_Transcribe_Speech_To_Text
             
         }
 
+        public void setJobPropertiesTranslate(TextTranslationJobProperties transcriptionJob, int incrementProgrees)
+        {
+            pgbAnalizerTranslate.Value = incrementProgrees;
+            lblJobNameTranslate.Text = transcriptionJob.JobName;
+            lblJobStatusTranslate.Text = transcriptionJob.JobStatus;
+            lblJobIdioma.Text = transcriptionJob.TargetLanguageCodes.ElementAt(0);
+        }
+
         public void displayStatusCurrentProgress(TimeSpan TotalTime, TimeSpan currentAudio)
         {
             if (lblTempoTotal.Text == "00:00:00")
@@ -294,9 +304,19 @@ namespace Amazon_Transcribe_Speech_To_Text
             }
         }
 
-        public void bindTextContent(List<Helpers.Models.Entity.Transcript> contentText)
+        public async void bindTextContent(List<Helpers.Models.Entity.Transcript> contentText)
         {
             richTextBox1.Text = contentText.ElementAt(0).transcript;
+            List<Voice> voices = await controller.setFromListVoices();
+            foreach (Voice item in voices)
+            {
+                cbxPolly.Items.Add(item.Id);
+            }
+        }
+
+        private void btnPolly_Click(object sender, EventArgs e)
+        {
+            controller.setFromVoicesAsync(cbxPolly.Text);
         }
 
         public async void displayTrancribe(Item item, Segment segment = null)
@@ -367,6 +387,8 @@ namespace Amazon_Transcribe_Speech_To_Text
 
         private void btnTraduzir_Click(object sender, EventArgs e)
         {
+            pgbAnalizerTranslate.Minimum = 0;
+            pgbAnalizerTranslate.Maximum = 100;
             int selectIdiomaTranscribe = cbJobTranscribe.SelectedIndex;
             if (selectIdiomaTranscribe >= 0) {
                 controller.TranslateFromIdioma(selectIdiomaTranscribe);
@@ -378,5 +400,12 @@ namespace Amazon_Transcribe_Speech_To_Text
             rcbTraduzido.Clear();
             rcbTraduzido.AppendText(translatedText);
         }
+
+        private void cbxPolly_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

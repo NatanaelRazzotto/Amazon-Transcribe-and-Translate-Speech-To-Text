@@ -1,5 +1,7 @@
-﻿using Amazon.TranscribeService;
+﻿using Amazon.Polly.Model;
+using Amazon.TranscribeService;
 using Amazon.TranscribeService.Model;
+using Amazon.Translate.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
@@ -26,6 +28,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         private TranscriptionJob transcriptionJob;
         private PlayerMedia playerMedia;
         private SpeechToText speechToText;
+        private AWSPollyService awsPollyService;
         private List<string> LanguageCodes = new List<string>() { "en", "ar", "cs", "de", "es", "fr", "it",
                                                                     "ja", "pt", "ru", "tr", "zh", "zh-TW" };
 
@@ -127,6 +130,10 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         {
             formTranscribe.setJobProperties(transcriptionJob, incrementProgrees);
         }
+        public void ViewStatusofTranslateJob(TextTranslationJobProperties transcriptionJob, int incrementProgrees)
+        {
+            formTranscribe.setJobPropertiesTranslate(transcriptionJob, incrementProgrees);
+        }
 
         public void TranscribeObject()
         {
@@ -199,6 +206,19 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         {
             formTranscribe.bindTextTranslator(translatedText);
         }
+
+        public async Task<List<Voice>> setFromListVoices()
+        {
+            awsPollyService = new AWSPollyService();
+            return  await awsPollyService.GetLocutorVoice();
+        }
+
+        public async void setFromVoicesAsync(string text)
+        {
+            awsPollyService.CallVoicePolly(text);
+        }
+
+
 
 
 

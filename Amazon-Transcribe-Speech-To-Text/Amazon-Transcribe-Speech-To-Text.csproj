@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.Polly" Version="3.7.1" />
     <PackageReference Include="AWSSDK.S3" Version="3.7.0.22" />
     <PackageReference Include="AWSSDK.SQS" Version="3.7.0.30" />
     <PackageReference Include="AWSSDK.TranscribeService" Version="3.7.2.16" />
