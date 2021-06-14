@@ -63,6 +63,8 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
                     if (textTranslationJobProperties.JobStatus == JobStatus.COMPLETED)
                     {
                         string pathURL = Path.GetFileName(textTranslationJobProperties.OutputDataConfig.S3Uri);
+                        translateTextResponse.SourceLanguageCode = textTranslationJobProperties.SourceLanguageCode;
+                        translateTextResponse.TargetLanguageCode = textTranslationJobProperties.TargetLanguageCodes.ElementAt(0);
                         translateTextResponse.TranslatedText = await awsS3Service.DownloadFileAsync(pathURL, awsUtilService);
                         incrementProgree = 100;
                         runningJobStatus = false;

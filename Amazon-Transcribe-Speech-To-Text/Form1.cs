@@ -145,7 +145,10 @@ namespace Amazon_Transcribe_Speech_To_Text
             double valueStart = Convert.ToDouble(lblStart.Text);
             double valueEnd = Convert.ToDouble(lblEnd.Text);
             string content = txtContent.Text;
-            controller.setModifyContent(valueStart, valueEnd, content);
+            if (String.IsNullOrEmpty(content))
+            {
+                controller.setModifyContent(valueStart, valueEnd, content);
+            }
         }
 
         private void btnReGerar_Click(object sender, EventArgs e)
@@ -316,7 +319,8 @@ namespace Amazon_Transcribe_Speech_To_Text
 
         private void btnPolly_Click(object sender, EventArgs e)
         {
-            controller.setFromVoicesAsync(cbxPolly.Text);
+            // controller.setPlayMedia();
+            controller.setPlayMediaPolly();
         }
 
         public async void displayTrancribe(Item item, Segment segment = null)
@@ -335,12 +339,17 @@ namespace Amazon_Transcribe_Speech_To_Text
                         {
                             cbAlternative.Items.Add($"{alternative.transcript}"); // - Confidence: {alternative.confidence.ToString("F")}%");
                         }
+                        cbAlternative.SelectedIndex = 0;
                     }
                 }
 
-                cbAlternative.SelectedIndex = 0;
-               // txtContent.Text = item.alternatives.ElementAt(0).content;
-                lblContentActual.Text = item.alternatives.ElementAt(0).content;
+
+                // txtContent.Text = item.alternatives.ElementAt(0).content;
+                if (item.alternatives.Count > 0)
+                {
+                    lblContentActual.Text = item.alternatives.ElementAt(0).content;
+                }
+              
                 /* if (item.alternatives.Count != 0)
                  {
                      cbAlternative.Items.Clear();
@@ -389,7 +398,7 @@ namespace Amazon_Transcribe_Speech_To_Text
         {
             pgbAnalizerTranslate.Minimum = 0;
             pgbAnalizerTranslate.Maximum = 100;
-            int selectIdiomaTranscribe = cbJobTranscribe.SelectedIndex;
+            int selectIdiomaTranscribe = cbxIdiomas.SelectedIndex;
             if (selectIdiomaTranscribe >= 0) {
                 controller.TranslateFromIdioma(selectIdiomaTranscribe);
             }
@@ -403,9 +412,22 @@ namespace Amazon_Transcribe_Speech_To_Text
 
         private void cbxPolly_SelectedIndexChanged(object sender, EventArgs e)
         {
+            controller.setFromVoicesAsync(cbxPolly.Text);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
 
         }
 
+        private void tabControlBody_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void btnTrechoTrasncription_Click(object sender, EventArgs e)
+        {
+            controller.trackAudio();
+        }
     }
 }

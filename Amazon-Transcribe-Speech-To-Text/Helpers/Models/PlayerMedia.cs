@@ -43,6 +43,23 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         { 
             return (executeMedia == false) ? true : false;
         }
+        public async Task newFileAudio(string fileName)
+        {
+            if (outputDevice == null)
+            {
+                outputDevice = new WaveOutEvent();
+                outputDevice.PlaybackStopped += OnPlaybackStopped;
+            }
+            if (mp3Reader == null)
+            {
+                // searchFile();
+                // string dire = Directory.GetCurrentDirectory();
+                mp3Reader = new Mp3FileReader((string.IsNullOrEmpty(fileName) ? fileNameMedia : fileName));
+                outputDevice.Init(mp3Reader);
+
+            }
+
+        }
 
         public async Task<bool> newFileAudio(AWSUtil file)
         {
@@ -53,7 +70,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             }
             if (mp3Reader == null)
             {
-                string path = searchFile(file);
+                string path = searchFile(file.FileNameActual, @"..\..\..\Audios");
                 if (!string.IsNullOrEmpty(path))
                 {
                     mp3Reader = new Mp3FileReader(path);
@@ -94,17 +111,42 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             return false;
 
         }
-        private string searchFile(AWSUtil file) {
-            string pathAudios = @"..\..\..\Audios";
+        public async Task<bool> newFileAudioPolly(string filePath)
+        {
+            if (outputDevice == null)
+            {
+                outputDevice = new WaveOutEvent();
+                outputDevice.PlaybackStopped += OnPlaybackStopped;
+            }
+            if (mp3Reader == null)
+            {
+                string path = searchFile(filePath, @"..\..\..\Audios\Traduzidos");
+                if (!string.IsNullOrEmpty(path))
+                {
+                    mp3Reader = new Mp3FileReader(path);
+                    outputDevice.Init(mp3Reader);
+                    return true;
+                }
+                else
+                {
+                    throw new ApplicationException("Um erro ao encontrar o arquivo");
+                }
+            }
+            return false;
+
+        }
+        private string searchFile(string file, string pathAudios) {
+
             if (Directory.Exists(pathAudios))
             {
                 Console.WriteLine("a");
-               // string[] arquivos = Directory.GetFiles(pathAudios);
+                file = Path.GetFileName(file);
+                // string[] arquivos = Directory.GetFiles(pathAudios);
                 string[] arquivos = Directory.GetFiles(pathAudios, "*mp3", SearchOption.AllDirectories);
                 for (int i = 0; i < arquivos.Length; i++)
                 {
                     string nameFileList = Path.GetFileName(arquivos[i]);
-                    if (file.FileNameActual == nameFileList)
+                    if (file == nameFileList)
                     {
                         return arquivos[i];
                     }
@@ -133,6 +175,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         
         }
         public void trackAudioPlay(TimeSpan time) {
+            Console.WriteLine(time);
             mp3Reader.CurrentTime = time;
         }
 

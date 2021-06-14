@@ -1,4 +1,5 @@
-﻿using Amazon.TranscribeService.Model;
+﻿using Amazon.Polly.Model;
+using Amazon.TranscribeService.Model;
 using Amazon.Translate.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices;
@@ -20,6 +21,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
         IController Controller;
         //AWSServices awsServices;
         PlayerMedia playerMedia;
+        PlayerMedia playerMediaPolly;
         Transcribed transcribed;
         
         private AWSS3Service awsS3Service;
@@ -27,6 +29,9 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
         private AWSTranslateService translateService;
         private AWSUtil awsUtil;
         private TranscriptionJob transcriptionJob;
+        private TranslateTextResponse translateTextResponse;
+        private AWSPollyService awsPollyService;
+
         public SpeechToText(Controller Controller, AWSUtil awsUtil, TranscriptionJob transcriptionJob) {
             this.Controller = Controller;
             this.awsUtil = awsUtil;
@@ -35,13 +40,14 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             this.transcriptionJob = transcriptionJob;
 
             this.playerMedia = new PlayerMedia(this.Controller);
+            this.playerMediaPolly = new PlayerMedia(this.Controller);
             setNewFileFromExecuteTrasncribe();
         }
         public async void setNewFileFromExecuteTrasncribe() {
             //this.transcribed = new Transcribed();
 
             bool checkFile = await playerMedia.newFileAudio(awsUtil);
-            if (checkFile)
+            if (checkFile) 
             {
                 string jsonString = await awsS3Service.getObjectTranscribeS3(awsUtil);
                 if (!String.IsNullOrEmpty(jsonString))
@@ -92,7 +98,13 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
 
             while (playMedia)
             {
-                if (statePlayback == PlaybackState.Playing)
+                await Task.Delay(1000);
+                TimeSpan currentAudio = playerMedia.getCurrentTime();
+                Item item = getTextFromSpeach(currentAudio);
+                Segment segment = getSegmentFromTime(currentAudio);
+                await Controller.displayParametersCurrents(currentAudio, item, segment);
+
+             /*   if (statePlayback == PlaybackState.Playing)
                 {
                     await Task.Delay(1000);
                     TimeSpan currentAudio = playerMedia.getCurrentTime();
@@ -103,7 +115,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
                 else if (statePlayback == PlaybackState.Paused)
                 {
                     await Task.Delay(2000);
-                }
+                }*/
             }
 
         }
@@ -178,7 +190,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
                     {
                         confidence = 1,
                         content = content,
-                        changed = true
+                       // changed = true
                     };
                     itemSelect.alternatives.Insert(0, alternative);
                 }
@@ -214,6 +226,30 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             return null;
         }
 
+        public async Task<List<Voice>> getCallsPollyAsync() {
+            awsPollyService = new AWSPollyService();
+            return await awsPollyService.GetLocutorVoice();
+        }
+
+        public async void CallTranslatePolly(string SelectedVoice)
+        {
+            string routePath = await  awsPollyService.CallVoicePolly(awsUtil, SelectedVoice, translateTextResponse);
+            if (!String.IsNullOrEmpty(routePath))
+            {
+                bool validate = await playerMediaPolly.newFileAudioPolly(routePath);
+            }
+        }
+        public void controlExecutePlayerPolly()
+        {
+            if (!playerMediaPolly.checkExecute())
+            {
+                playerMediaPolly.clickPlay();
+            }
+            else
+            {
+                playerMediaPolly.clickPaused();
+            }
+        }
         public async void TranslateTextFromAudio(string selectedIdioma)
         {
             Transcript results = transcribed.results.transcripts.ElementAt(0);
@@ -221,7 +257,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             ///Dividir string ou usar um lambda?
 
             translateService = new AWSTranslateService(Controller);
-            TranslateTextResponse translateTextResponse = await PreparToTranslate(results.transcript, transcriptionJob.LanguageCode, selectedIdioma);
+            translateTextResponse = await PreparToTranslate(results.transcript, transcriptionJob.LanguageCode, selectedIdioma);
             Controller.setTranscribedEditTranslator(translateTextResponse.TranslatedText);
             // TODO IMPLEMRNTAÇÃO ITEM DE RETORNO TRADUZIDO
 
@@ -231,7 +267,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
         public async Task<TranslateTextResponse> PreparToTranslate(string translate, string SourceLanguage, string TargetLanguage)
         {
 
-            TranslateTextResponse translateTextResponse = new TranslateTextResponse();
+            TranslateTextResponse translateResponse = new TranslateTextResponse();
 
             string[] codLanguage = SourceLanguage.Split("-");
             int lenghtStringTranslate = translate.Length;
@@ -240,13 +276,13 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
 
             if (lenghtStringTranslate >= 5000)
             {
-                translateTextResponse = await translateService.requestExecuteTranslate(translate, awsUtil);
-                return translateTextResponse;
+                translateResponse = await translateService.requestExecuteTranslate(translate, awsUtil);
+                return translateResponse;
             }
             else
             {
-                translateTextResponse = await translateService.TranslateText(translate, codLanguage[0], TargetLanguage);
-                return translateTextResponse;
+                translateResponse = await translateService.TranslateText(translate, codLanguage[0], TargetLanguage);
+                return translateResponse;
             }
         }
 

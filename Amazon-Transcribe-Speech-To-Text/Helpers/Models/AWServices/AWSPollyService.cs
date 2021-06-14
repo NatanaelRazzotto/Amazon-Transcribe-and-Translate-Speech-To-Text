@@ -4,6 +4,7 @@ using Amazon.Polly.Model;
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
 using Amazon.S3;
+using Amazon.Translate.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,7 +64,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             }
             return null;
         }
-        public async void CallVoicePolly(string voiceIDSelected)
+        public async Task<string> CallVoicePolly(AWSUtil awsUtil,string voiceIDSelected, TranslateTextResponse translateTextResponse)
         {
             try
             {
@@ -76,20 +77,24 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
                         SampleRate = "8000",
                         VoiceId = voiceIDSelected,
                     };
-
                     SynthesizeSpeechResponse synthesizeSpeechResponse = await PollyClient.SynthesizeSpeechAsync(synthesizeSpeechRequest);
-                    using (var FileStream = File.Create(@"..\..\..\Audios\Traduzidos\teste-arquivo.mp3"))
+                   
+                    string path = $@"..\..\..\Audios\Traduzidos\MediaPolly-Translate-{awsUtil.FileNameActual}";
+                    using (var FileStream = File.Create(path))
                     {
                         synthesizeSpeechResponse.AudioStream.CopyTo(FileStream);
                         FileStream.Flush();
                         FileStream.Close();
                     }
+                    return path;
                 }
+                return "";
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                
-                throw new ApplicationException("Erro ao obter Locutores ");
+                Console.WriteLine(e.Message);
+                //    throw new ApplicationException("Erro ao obter Locutores ");
+                throw new ApplicationException(e.Message);
             }
         }
 

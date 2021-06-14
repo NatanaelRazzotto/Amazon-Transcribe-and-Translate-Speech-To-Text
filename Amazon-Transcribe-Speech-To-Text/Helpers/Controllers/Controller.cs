@@ -49,7 +49,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         public async void setFileFromBucket(string fileName)
         {
             bool insertInBucket= true;
-            awsUtil.NewFileName = fileName;
+            awsUtil.FileNameActual = fileName;
             if (awsS3Service.checkFileOnBucket(awsUtil))
             {
                 string messageAlert = $"Arquivo ja consta no bucket: {awsUtil.BucketNameInput}, deseja substituilo ?";
@@ -126,9 +126,10 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
            await transcribeService.requestExecuteTranscribe(awsUtil);
         }
 
-        public void ViewStatusofTranscriptJob(TranscriptionJob transcriptionJob, int incrementProgrees)
+        public void ViewStatusofTranscriptJob(TranscriptionJob transcriptionJobNew, int incrementProgrees)
         {
-            formTranscribe.setJobProperties(transcriptionJob, incrementProgrees);
+            this.transcriptionJob = transcriptionJobNew;
+            formTranscribe.setJobProperties(transcriptionJobNew, incrementProgrees);
         }
         public void ViewStatusofTranslateJob(TextTranslationJobProperties transcriptionJob, int incrementProgrees)
         {
@@ -156,9 +157,13 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         }
 
         #region controlesAudio
-        public async void setPlayMedia()
+        public  void setPlayMedia()
         {
             speechToText.controlExecutePlayer();
+        }
+        public void setPlayMediaPolly()
+        {
+            speechToText.controlExecutePlayerPolly();
         }
         public void definedPositionAudioMilisseconds(double timeSelect)
         {
@@ -209,13 +214,18 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
 
         public async Task<List<Voice>> setFromListVoices()
         {
-            awsPollyService = new AWSPollyService();
-            return  await awsPollyService.GetLocutorVoice();
+           return await speechToText.getCallsPollyAsync();
         }
 
-        public async void setFromVoicesAsync(string text)
+        public void setFromVoicesAsync(string text)
         {
-            awsPollyService.CallVoicePolly(text);
+            speechToText.CallTranslatePolly(text);
+
+        }
+
+        public async void trackAudio()
+        {
+           await speechToText.trackAudio();
         }
 
 

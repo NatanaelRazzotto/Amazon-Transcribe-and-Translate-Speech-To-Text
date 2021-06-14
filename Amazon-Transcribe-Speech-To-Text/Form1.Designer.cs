@@ -156,6 +156,8 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.btnTrechoTrasncription = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -211,7 +213,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.btnSelectBucktes.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSelectBucktes.BackgroundImage")));
             this.btnSelectBucktes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSelectBucktes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelectBucktes.Location = new System.Drawing.Point(851, 24);
+            this.btnSelectBucktes.Location = new System.Drawing.Point(928, 23);
             this.btnSelectBucktes.Name = "btnSelectBucktes";
             this.btnSelectBucktes.Size = new System.Drawing.Size(57, 50);
             this.btnSelectBucktes.TabIndex = 15;
@@ -234,7 +236,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.cbBucketsInputS3.FormattingEnabled = true;
             this.cbBucketsInputS3.Location = new System.Drawing.Point(451, 16);
             this.cbBucketsInputS3.Name = "cbBucketsInputS3";
-            this.cbBucketsInputS3.Size = new System.Drawing.Size(359, 23);
+            this.cbBucketsInputS3.Size = new System.Drawing.Size(428, 23);
             this.cbBucketsInputS3.TabIndex = 15;
             // 
             // label3
@@ -253,7 +255,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.cbBucketsOutputS3.FormattingEnabled = true;
             this.cbBucketsOutputS3.Location = new System.Drawing.Point(451, 56);
             this.cbBucketsOutputS3.Name = "cbBucketsOutputS3";
-            this.cbBucketsOutputS3.Size = new System.Drawing.Size(359, 23);
+            this.cbBucketsOutputS3.Size = new System.Drawing.Size(428, 23);
             this.cbBucketsOutputS3.TabIndex = 3;
             // 
             // label1
@@ -280,6 +282,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(805, 62);
             this.panel2.TabIndex = 1;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // tbAccountant
             // 
@@ -405,6 +408,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.tabControlBody.SelectedIndex = 0;
             this.tabControlBody.Size = new System.Drawing.Size(1115, 516);
             this.tabControlBody.TabIndex = 0;
+            this.tabControlBody.SelectedIndexChanged += new System.EventHandler(this.tabControlBody_SelectedIndexChanged);
             // 
             // tabPageFile
             // 
@@ -841,6 +845,8 @@ namespace Amazon_Transcribe_Speech_To_Text
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel12.BackColor = System.Drawing.Color.Tan;
+            this.panel12.Controls.Add(this.label50);
+            this.panel12.Controls.Add(this.btnTrechoTrasncription);
             this.panel12.Controls.Add(this.pgbAnalizerTranslate);
             this.panel12.Controls.Add(this.panel16);
             this.panel12.Controls.Add(this.panel15);
@@ -1297,7 +1303,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel8.Controls.Add(this.lblConfidence);
             this.panel8.Controls.Add(this.label24);
             this.panel8.Controls.Add(this.label12);
-            this.panel8.Location = new System.Drawing.Point(896, 134);
+            this.panel8.Location = new System.Drawing.Point(896, 92);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(158, 133);
             this.panel8.TabIndex = 22;
@@ -1538,6 +1544,28 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label45.TabIndex = 42;
             this.label45.Text = "MO";
             // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label50.Location = new System.Drawing.Point(545, 97);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(123, 16);
+            this.label50.TabIndex = 47;
+            this.label50.Text = "Trecho Transcription";
+            // 
+            // btnTrechoTrasncription
+            // 
+            this.btnTrechoTrasncription.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTrechoTrasncription.BackgroundImage")));
+            this.btnTrechoTrasncription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTrechoTrasncription.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTrechoTrasncription.Location = new System.Drawing.Point(670, 89);
+            this.btnTrechoTrasncription.Name = "btnTrechoTrasncription";
+            this.btnTrechoTrasncription.Size = new System.Drawing.Size(37, 32);
+            this.btnTrechoTrasncription.TabIndex = 46;
+            this.btnTrechoTrasncription.UseVisualStyleBackColor = true;
+            this.btnTrechoTrasncription.Click += new System.EventHandler(this.btnTrechoTrasncription_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1725,6 +1753,8 @@ namespace Amazon_Transcribe_Speech_To_Text
         private System.Windows.Forms.ComboBox cbxPolly;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Button btnPolly;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Button btnTrechoTrasncription;
     }
 }
 
