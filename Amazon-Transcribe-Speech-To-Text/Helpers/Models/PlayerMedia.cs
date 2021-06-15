@@ -43,30 +43,13 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         { 
             return (executeMedia == false) ? true : false;
         }
-        public async Task newFileAudio(string fileName)
-        {
-            if (outputDevice == null)
-            {
-                outputDevice = new WaveOutEvent();
-                outputDevice.PlaybackStopped += OnPlaybackStopped;
-            }
-            if (mp3Reader == null)
-            {
-                // searchFile();
-                // string dire = Directory.GetCurrentDirectory();
-                mp3Reader = new Mp3FileReader((string.IsNullOrEmpty(fileName) ? fileNameMedia : fileName));
-                outputDevice.Init(mp3Reader);
-
-            }
-
-        }
 
         public async Task<bool> newFileAudio(AWSUtil file)
         {
             if (outputDevice == null)
             {
                 outputDevice = new WaveOutEvent();
-                outputDevice.PlaybackStopped += OnPlaybackStopped;
+               // outputDevice.PlaybackStopped += OnPlaybackStopped;
             }
             if (mp3Reader == null)
             {
@@ -116,7 +99,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             if (outputDevice == null)
             {
                 outputDevice = new WaveOutEvent();
-                outputDevice.PlaybackStopped += OnPlaybackStopped;
+               // outputDevice.PlaybackStopped += OnPlaybackStopped;
             }
             if (mp3Reader == null)
             {
@@ -162,15 +145,17 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         {
             outputDevice.Dispose();
             outputDevice = null;
-            audioFile.Dispose();
-            audioFile = null;
+            mp3Reader.Dispose();
+            mp3Reader = null;
+          //  audioFile.Dispose();
+          //   audioFile = null;
         }
         public async Task trackAudioA() {
             while (outputDevice.PlaybackState == PlaybackState.Playing)
             {
                 await Task.Delay(3000);
                 long currentPosition = outputDevice.GetPosition();
-                decimal position = ((decimal)currentPosition / (decimal)audioFile.Length)*100;
+                decimal position = ((decimal)currentPosition / (decimal)mp3Reader.Length)*100;
             }          
         
         }

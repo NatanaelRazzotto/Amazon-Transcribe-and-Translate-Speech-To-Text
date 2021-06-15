@@ -45,14 +45,44 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             }
             return false;
         }
-        public async Task<List<Voice>> GetLocutorVoice(string idiomaIdentificado) {
+        public async Task<List<Voice>> DefinedVoices(string idiomaIdentificado) {
+            /*        private List<string> LanguageCodes = new List<string>() { "en", "ar", "de", "es", "fr", "it",
+                                                                    "ja", "pt", "ru", "tr"*/
+
+            switch (idiomaIdentificado)
+            {
+                case "en":
+                    return await GetLocutorVoice(LanguageCode.EnUS);
+                case "ar":
+                    return await GetLocutorVoice(LanguageCode.Arb);
+                case "de":
+                    return await GetLocutorVoice(LanguageCode.DeDE);
+                case "es":
+                    return await GetLocutorVoice(LanguageCode.EsES);
+                case "fr":
+                    return await GetLocutorVoice(LanguageCode.FrFR);
+                case "it":
+                    return await GetLocutorVoice(LanguageCode.ItIT);
+                case "ja":
+                    return await GetLocutorVoice(LanguageCode.JaJP);
+                case "pt":
+                    return await GetLocutorVoice(LanguageCode.PtBR);
+                case "ru":
+                    return await GetLocutorVoice(LanguageCode.RuRU);
+                case "tr":
+                    return await GetLocutorVoice(LanguageCode.TrTR);
+                default:
+                    return null;
+            }
+        }
+        public async Task<List<Voice>> GetLocutorVoice(LanguageCode idiomaIdentificado) {
             try
             {
 
                 if (GetPollyClient()) {
                     DescribeVoicesRequest describeVoicesRequest = new DescribeVoicesRequest
                     {
-                        LanguageCode = LanguageCode.PtBR,
+                        LanguageCode = idiomaIdentificado,
                     };
                     DescribeVoicesResponse describeVoicesResponse = await PollyClient.DescribeVoicesAsync(describeVoicesRequest);
                     List<Voice> voices = describeVoicesResponse.Voices;
@@ -80,7 +110,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
                     };
                     SynthesizeSpeechResponse synthesizeSpeechResponse = await PollyClient.SynthesizeSpeechAsync(synthesizeSpeechRequest);
                    
-                    string path = $@"..\..\..\Audios\Traduzidos\MediaPolly-Translate-{awsUtil.FileNameActual}";
+                    string path = $@"..\..\..\Audios\Traduzidos\MediaPolly-{Guid.NewGuid()}.mp3";
                     using (var FileStream = File.Create(path))
                     {
                         synthesizeSpeechResponse.AudioStream.CopyTo(FileStream);

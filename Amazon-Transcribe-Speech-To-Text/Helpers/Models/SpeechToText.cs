@@ -31,6 +31,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
         private TranscriptionJob transcriptionJob;
         private TranslateTextResponse translateTextResponse;
         private AWSPollyService awsPollyService;
+        private Task taskControle;
 
         public SpeechToText(Controller Controller, AWSUtil awsUtil, TranscriptionJob transcriptionJob) {
             this.Controller = Controller;
@@ -40,7 +41,6 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             this.transcriptionJob = transcriptionJob;
 
             this.playerMedia = new PlayerMedia(this.Controller);
-            this.playerMediaPolly = new PlayerMedia(this.Controller);
             setNewFileFromExecuteTrasncribe();
         }
         public async void setNewFileFromExecuteTrasncribe() {
@@ -90,6 +90,11 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             TimeSpan newTime = TimeSpan.FromMilliseconds(time);
             playerMedia.trackAudioPlay(newTime);
         }
+        public async void StartViewDetalhesTranscription()
+        {
+            //taskControle = Task.Run(() => trackAudio());
+            //taskControle.Wait
+        }
 
         public async Task trackAudio()
         {
@@ -98,25 +103,27 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
 
             while (playMedia)
             {
-                await Task.Delay(1000);
-                TimeSpan currentAudio = playerMedia.getCurrentTime();
-                Item item = getTextFromSpeach(currentAudio);
-                Segment segment = getSegmentFromTime(currentAudio);
-                Controller.setViewDetailsContentSelect(currentAudio, segment, 0);
-                await Controller.displayParametersCurrents(currentAudio, item, segment);
-
-             /*   if (statePlayback == PlaybackState.Playing)
+                if (statePlayback == PlaybackState.Playing)
                 {
                     await Task.Delay(1000);
-                    TimeSpan currentAudio = playerMedia.getCurrentTime();
-                    Item item = getTextFromSpeach(currentAudio);
-                    Segment segment = getSegmentFromTime(currentAudio);
-                    await Controller.displayParametersCurrents(currentAudio, item, segment);                    
                 }
                 else if (statePlayback == PlaybackState.Paused)
                 {
                     await Task.Delay(2000);
-                }*/
+                }
+                else if (statePlayback == PlaybackState.Stopped)
+                {
+                    await Task.Delay(5000);
+                }
+                TimeSpan currentAudio = playerMedia.getCurrentTime();
+                Item item = getTextFromSpeach(currentAudio);
+                Segment segment = getSegmentFromTime(currentAudio);
+                if ((segment != null) && (item != null))
+                {
+                    //Controller.setViewDetailsContentSelect(segment, 0);
+                    Controller.displayParametersCurrents(currentAudio, item, segment);
+                }
+
             }
 
         }
@@ -241,14 +248,23 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             }
             return segmentContent;
         }
+        public Segment GetFromTempDetails(double valueStart, double valueEnd, int indexSelect)
+        {
+            List<Item> items = transcribed.results.items;
+            List<Segment> Segments = transcribed.results.Segments;
+            Segment segmentContent = Segments.Find(x => (x.start_time <= valueStart) && (x.end_time >= valueEnd));
+            return segmentContent;
 
-        /*public async Task<List<Voice>> getCallsPollyAsync(string ) {
-            //awsPollyService = new AWSPollyService();
-            //return await awsPollyService.GetLocutorVoice();
-        }*/
+        }
+
+            /*public async Task<List<Voice>> getCallsPollyAsync(string ) {
+                //awsPollyService = new AWSPollyService();
+                //return await awsPollyService.GetLocutorVoice();
+            }*/
 
         public async void CallTranslatePolly(string SelectedVoice)
         {
+            this.playerMediaPolly = new PlayerMedia(this.Controller);
             string routePath = await  awsPollyService.CallVoicePolly(awsUtil, SelectedVoice, translateTextResponse);
             if (!String.IsNullOrEmpty(routePath))
             {
@@ -274,10 +290,11 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
 
             translateService = new AWSTranslateService(Controller);
             translateTextResponse = await PreparToTranslate(results.transcript, transcriptionJob.LanguageCode, selectedIdioma);
+            Controller.setTranscribedEditTranslator(translateTextResponse);
             //return await speechToText.getCallsPollyAsync();
             awsPollyService = new AWSPollyService();
            // return await awsPollyService.GetLocutorVoice();
-            List<Voice> voices = await awsPollyService.GetLocutorVoice(translateTextResponse.TargetLanguageCode);
+            List<Voice> voices = await awsPollyService.DefinedVoices(translateTextResponse.TargetLanguageCode);
             Controller.setFromListVoices(voices);
      
             // TODO IMPLEMRNTAÇÃO ITEM DE RETORNO TRADUZIDO
@@ -303,6 +320,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             else
             {
                 translateResponse = await translateService.TranslateText(translate, codLanguage[0], TargetLanguage);
+                //Controller.ViewStatusofTranslateJob(translateResponse, 100);
                 return translateResponse;
             }
         }

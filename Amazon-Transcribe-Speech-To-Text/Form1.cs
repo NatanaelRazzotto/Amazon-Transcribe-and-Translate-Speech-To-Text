@@ -101,6 +101,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             pgbAnalizer.Minimum = 0;
             pgbAnalizer.Maximum = 100;
             controller.executeTranscribeToS3();
+            btnAnalizer.Enabled = true;
         }
 
         private void btnLoadLastTranscription_Click(object sender, EventArgs e)
@@ -144,7 +145,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             double valueStart = Convert.ToDouble(lblStart.Text);
             double valueEnd = Convert.ToDouble(lblEnd.Text);
             int indexSelect = cbAlternative.SelectedIndex;
-            controller.setRemoveContentSelect(valueStart, valueEnd, indexSelect);
+            controller.GetDetails(valueStart, valueEnd, indexSelect);
         }
 
         private void btnAddContent_Click(object sender, EventArgs e)
@@ -167,6 +168,28 @@ namespace Amazon_Transcribe_Speech_To_Text
         {
             double timeSelect = trackBarStateAudio.Value;
             controller.definedPositionAudioMilisseconds(timeSelect);
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            double timeSelect = trackBarStateAudio.Value;
+            timeSelect = timeSelect + 500;
+            if (timeSelect <= trackBarStateAudio.Maximum)
+            {
+                controller.definedPositionAudioMilisseconds(timeSelect);
+            }
+            else
+            {
+                controller.definedPositionAudioMilisseconds(trackBarStateAudio.Maximum);
+            }
+        }
+        private void button8_Click(object sender, EventArgs e)
+        {
+            double timeSelect = trackBarStateAudio.Value;
+            timeSelect = timeSelect - 500;
+            if (timeSelect >= 0)
+            {
+                controller.definedPositionAudioMilisseconds(timeSelect);
+            }
         }
         #region Methods
         // Metodos responsaveis pelo populamento dos dados
@@ -313,9 +336,13 @@ namespace Amazon_Transcribe_Speech_To_Text
                 trackBarStateAudio.Minimum = 0;
             }
         }
-        public void bindMenuTranslate(LanguageCode languageCode, List<string> languageCodes)
+        public void bindMenuTranslate(TranscriptionJob transcriptionJob, List<string> languageCodes)
         {
-            lblIdiomaIdentificado.Text = languageCode;
+            lblNameTranscription.Text = transcriptionJob.TranscriptionJobName;
+            lblScoreIdeti.Text = transcriptionJob.IdentifiedLanguageScore.ToString();
+            lblDateConclusion.Text = transcriptionJob.CompletionTime.ToString();
+            lblCreateJob.Text = transcriptionJob.StartTime.ToString();
+            lblIdiomaIdentificado.Text = transcriptionJob.LanguageCode;
             languageCodes.ForEach(language => cbxIdiomas.Items.Add(language.ToString()));
         }
         public void bindTextContent(List<Helpers.Models.Entity.Transcript> contentText)
@@ -386,7 +413,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             }
         }
 
-        public async void displayStatusCurrentProgress(TimeSpan currentAudio)
+        public void displayStatusCurrentProgress(TimeSpan currentAudio)
         {         
             if (currentAudio.TotalMilliseconds != 0)
             {
@@ -406,12 +433,8 @@ namespace Amazon_Transcribe_Speech_To_Text
 
         public void displayDetailsTrancribe(string alternative)
         {
+            rtbDetalhes.Clear();
             rtbDetalhes.AppendText(alternative);
-        }
-
-        private void cbFilesBucket_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnTraduzir_Click(object sender, EventArgs e)
@@ -449,6 +472,20 @@ namespace Amazon_Transcribe_Speech_To_Text
         {
             controller.trackAudio();
         }
+
+        private void cbxIdiomas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if ((cbFilesBucket.SelectedItem != null))//&& (cbFilesBucket.ValueMember != "")
+            {
+                controller.setFileFromAnalize(cbFilesBucket.SelectedItem.ToString());
+            }
+        }
+
 
     }
 }

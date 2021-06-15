@@ -194,7 +194,11 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
                 listResponse = amazonS3Client.ListObjectsAsync(request).Result;
                 foreach (S3Object s3Object in listResponse.S3Objects)
                 {
-                    awsUtilProperts.ExistingImagesBucket.Add(s3Object.Key);
+                    string keyExtension = Path.GetExtension(s3Object.Key);
+                    if (keyExtension.Equals(".mp3"))
+                    {
+                        awsUtilProperts.ExistingImagesBucket.Add(s3Object.Key);
+                    }
                 }
                 request.Marker = listResponse.NextMarker;
 

@@ -30,8 +30,9 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         private PlayerMedia playerMedia;
         private SpeechToText speechToText;
         private AWSPollyService awsPollyService;
-        private List<string> LanguageCodes = new List<string>() { "en", "ar", "cs", "de", "es", "fr", "it",
-                                                                    "ja", "pt", "ru", "tr", "zh", "zh-TW" };
+        /* private List<string> LanguageCodes = new List<string>() { "en", "ar", "cs", "de", "es", "fr", "it",
+                                                                     "ja", "pt", "ru", "tr", "zh", "zh-TW" };*/
+        private List<string> LanguageCodes = new List<string>() { "en", "ar", "de", "es", "fr", "it", "ja", "pt", "ru", "tr" };
 
 
         public Controller(IViewTranscribe formTranscribe)
@@ -75,11 +76,12 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         {
             formTranscribe.displayTotalTime(totalTime);
             formTranscribe.bindTextContent(contentText);
-            formTranscribe.bindMenuTranslate(transcriptionJob.LanguageCode, LanguageCodes);
+            formTranscribe.bindMenuTranslate(transcriptionJob, LanguageCodes);
+
 
         }
 
-        public async Task displayParametersCurrents(TimeSpan currentAudio, Item item, Segment segment) {
+        public void displayParametersCurrents(TimeSpan currentAudio, Item item, Segment segment) {
             formTranscribe.displayStatusCurrentProgress(currentAudio);
             formTranscribe.displayTrancribe(item, segment);
         }
@@ -87,7 +89,6 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         public bool setFromNameBuckets(string bucketInput, string bucketOutput)
         {
             awsUtil.setBucktes(bucketInput, bucketOutput);
-            //awsServices.setBucktes(bucketInput, bucketOutput);
             return updateComboFileOnBucket(bucketInput);
 
         }
@@ -187,16 +188,23 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         {
             Segment item = speechToText.actualizarContentTempo(valueStart, valueEnd, indexSelect);
             //Item item = speechToText.removeContentItem(valueStart, valueEnd, indexSelect);
-          /*  if (item != null)
-            {
-                if (item.alternatives.Count != 0)
-                {
-                    formTranscribe.displayTrancribe(item);
-                }
-            }*/
+            /* if (item != null)
+             {
+                 if (item.alternatives.Count != 0)
+                 {
+                     formTranscribe.displayTrancribe(item);
+                 }
+             }*/
+
+            
 
         }
-        public async Task setViewDetailsContentSelect(TimeSpan currentAudio, Segment segment, int index = 0)
+        public void GetDetails(double valueStart, double valueEnd, int indexSelect)
+        {
+            Segment segment = speechToText.GetFromTempDetails( valueStart,  valueEnd, indexSelect);
+            setViewDetailsContentSelect( segment, indexSelect);
+        }
+        public void setViewDetailsContentSelect(Segment segment, int index = 0)
         {
             string detailsTranscribe = "";
             AlternativeSegment alternative = segment.alternatives.ElementAt(index);
@@ -205,7 +213,11 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             {
                 detailsTranscribe = $"Alternativa nº: {index}, no periodo de tempo: inicial: {segment.start_time} até final: {segment.end_time} \n";
                 detailsTranscribe += $"Segmento da Transcrição: {alternative.transcript} \n";
-                detailsTranscribe += $"-Items do Segmento-";
+                detailsTranscribe += $"---------------------Items do Segmento-------------------- \n";
+                foreach (ItemSegment item in alternative.items)
+                {
+                    detailsTranscribe += $"-Item {item.type} - Conteudo '{item.content}' - Posição Inicial:{item.start_time} - Posição Inicial: {item.end_time} \n";
+                }
 
                 formTranscribe.displayDetailsTrancribe(detailsTranscribe);
             }
@@ -240,7 +252,8 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
 
         public async void trackAudio()
         {
-           await speechToText.trackAudio();
+                  
+            await speechToText.trackAudio();
         }
 
 
