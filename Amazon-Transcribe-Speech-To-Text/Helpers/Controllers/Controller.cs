@@ -6,6 +6,7 @@ using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys.segments;
 using AWS_Rekognition_Objects.Helpers.Model;
 using NAudio.Wave;
 using System;
@@ -173,27 +174,44 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
         internal void setModifyContent(double valueStart, double valueEnd, string content)
         {
             Item itemNew = speechToText.addContentItem(valueStart, valueEnd, content);
-            if (itemNew != null)
+         /*   if (itemNew != null)
             {
                 if (itemNew.alternatives.Count != 0)
                 {
                     formTranscribe.displayTrancribe(itemNew);
                 }
-            }
+            }*/
         }
 
         public void setRemoveContentSelect(double valueStart, double valueEnd, int indexSelect)
-        {            
-            Item item = speechToText.actualizarContentTempo(valueStart, valueEnd, indexSelect);
+        {
+            Segment item = speechToText.actualizarContentTempo(valueStart, valueEnd, indexSelect);
             //Item item = speechToText.removeContentItem(valueStart, valueEnd, indexSelect);
-            if (item != null)
+          /*  if (item != null)
             {
                 if (item.alternatives.Count != 0)
                 {
                     formTranscribe.displayTrancribe(item);
                 }
-            }
+            }*/
 
+        }
+        public void setViewDetailsContentSelect(double valueStart, double valueEnd, int indexSelect)
+        {
+            string detailsTranscribe = "";
+            AlternativeSegment alternative = speechToText.SearchContentTempo(valueStart, valueEnd, indexSelect);
+            if (alternative != null)
+            {
+                detailsTranscribe = $"Alternativa nº: {indexSelect}, no periodo de tempo: inicial: {valueStart} até final: {valueEnd} \n";
+                detailsTranscribe += $"Segmento da Transcrição: {alternative.transcript} \n";
+                detailsTranscribe += $"-Items do Segmento-";
+
+
+
+
+
+                formTranscribe.displayDetailsTrancribe(detailsTranscribe);
+            }
         }
 
         public void genarateNewContent() {
@@ -207,14 +225,14 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             speechToText.TranslateTextFromAudio(selectedIdioma);
         }
 
-        public void setTranscribedEditTranslator(string translatedText)
+        public void setTranscribedEditTranslator(TranslateTextResponse translateTextResponse)
         {
-            formTranscribe.bindTextTranslator(translatedText);
+            formTranscribe.bindTextTranslator(translateTextResponse.TranslatedText);           
         }
 
-        public async Task<List<Voice>> setFromListVoices()
+        public void setFromListVoices(List<Voice> voices)
         {
-           return await speechToText.getCallsPollyAsync();
+            formTranscribe.bindVoicesPolly(voices);
         }
 
         public void setFromVoicesAsync(string text)

@@ -120,7 +120,8 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             {
                 Media = new Media { MediaFileUri = $"s3://{awsUtilProperts.BucketNameInput}/{awsUtilProperts.FileNameActual}" },
                 OutputBucketName = awsUtilProperts.BucketNameOutput,
-                LanguageCode = LanguageCode.PtBR,
+                IdentifyLanguage = true,
+               // LanguageCode = LanguageCode.PtBR,
                 MediaFormat = MediaFormat.Mp3,
                 Settings = new Settings { MaxAlternatives = 3, ShowAlternatives = true },//MaxSpeakerLabels = 3, ShowSpeakerLabels = true
                 TranscriptionJobName = $"Transcribe-MediaFile-{DateTime.Now.ToString("yyyymmddhhmmss")}"

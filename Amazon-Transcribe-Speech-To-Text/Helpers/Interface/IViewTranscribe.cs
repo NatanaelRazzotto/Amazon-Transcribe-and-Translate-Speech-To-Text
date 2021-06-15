@@ -1,8 +1,10 @@
-﻿using Amazon.TranscribeService;
+﻿using Amazon.Polly.Model;
+using Amazon.TranscribeService;
 using Amazon.TranscribeService.Model;
 using Amazon.Translate.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
+using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys.segments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,12 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Interface
         public void displayTotalTime(TimeSpan totalTime);
         public void bindTextContent(List<Models.Entity.Transcript> contentText);
         public void displayTrancribe(Item item, Segment segment = null);
+        public void displayDetailsTrancribe(string alternative);
         public void displayStatusCurrentProgress(TimeSpan currentAudio);
         public bool updateComboNameJobs(List<TranscriptionJobSummary> jobsSummary);
         void bindMenuTranslate(LanguageCode languageCode, List<string> languageCodes);
         void bindTextTranslator(string translatedText);
         void setJobPropertiesTranslate(TextTranslationJobProperties transcriptionJob, int incrementProgrees);
+        void bindVoicesPolly(List<Voice>voices );
     }
 }

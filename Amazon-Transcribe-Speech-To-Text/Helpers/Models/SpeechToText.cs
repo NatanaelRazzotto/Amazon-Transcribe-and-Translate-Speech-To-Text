@@ -176,7 +176,15 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             }
             return alternative;
         }
+        public AlternativeSegment SearchContentTempo(double valueStart, double valueEnd, int indexSelect)
+        {
+            List<Item> items = transcribed.results.items;
+            List<Segment> Segments = transcribed.results.Segments;
+            Segment segmentContent = Segments.Find(x => (x.start_time <= valueStart) && (x.end_time >= valueEnd));
+            AlternativeSegment alternativeSegment = segmentContent.alternatives.ElementAt(indexSelect);
+            return alternativeSegment;
 
+        }
         public Item addContentItem(double valueStart, double valueEnd, string content)
         {
             List<Item> items = transcribed.results.items;
@@ -190,9 +198,11 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
                     {
                         confidence = 1,
                         content = content,
-                       // changed = true
+                        changed = true
                     };
-                    itemSelect.alternatives.Insert(0, alternative);
+                    // itemSelect.alternatives.Insert(0, alternative);
+                    itemSelect.alternatives.Clear();
+                    itemSelect.alternatives.Add(alternative);
                 }
                 else
                 {
@@ -204,7 +214,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
             return itemSelect;
         }
 
-        public Item actualizarContentTempo(double valueStart, double valueEnd, int indexSelect)
+        public Segment actualizarContentTempo(double valueStart, double valueEnd, int indexSelect)
         {
             List<Item> items = transcribed.results.items;
             List<Segment> Segments = transcribed.results.Segments;
@@ -214,22 +224,27 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
 
             foreach (var alternative in alternativeSegment.items)
             {
-                foreach (var item in items)
+                foreach (Item item in items)
                 {
                     if ((item.start_time == alternative.start_time) && (item.end_time == alternative.end_time))
                     {
+                        
+                        item.type = alternative.type;
+                        //item.averageConfidence = alternative.confidence;
+                        item.alternatives.ElementAt(0).confidence = alternative.confidence;
                         item.alternatives.ElementAt(0).content = alternative.content;
-                        return item;
+                        item.alternatives.ElementAt(0).changed = true;
+                       // return item;
                     }
                 }
             }
-            return null;
+            return segmentContent;
         }
 
-        public async Task<List<Voice>> getCallsPollyAsync() {
-            awsPollyService = new AWSPollyService();
-            return await awsPollyService.GetLocutorVoice();
-        }
+        /*public async Task<List<Voice>> getCallsPollyAsync(string ) {
+            //awsPollyService = new AWSPollyService();
+            //return await awsPollyService.GetLocutorVoice();
+        }*/
 
         public async void CallTranslatePolly(string SelectedVoice)
         {
@@ -258,7 +273,12 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
 
             translateService = new AWSTranslateService(Controller);
             translateTextResponse = await PreparToTranslate(results.transcript, transcriptionJob.LanguageCode, selectedIdioma);
-            Controller.setTranscribedEditTranslator(translateTextResponse.TranslatedText);
+            //return await speechToText.getCallsPollyAsync();
+            awsPollyService = new AWSPollyService();
+           // return await awsPollyService.GetLocutorVoice();
+            List<Voice> voices = await awsPollyService.GetLocutorVoice(translateTextResponse.TargetLanguageCode);
+            Controller.setFromListVoices(voices);
+     
             // TODO IMPLEMRNTAÇÃO ITEM DE RETORNO TRADUZIDO
 
         }

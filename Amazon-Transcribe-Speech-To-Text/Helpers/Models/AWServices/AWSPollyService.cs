@@ -45,9 +45,10 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             }
             return false;
         }
-        public async Task<List<Voice>> GetLocutorVoice() {
+        public async Task<List<Voice>> GetLocutorVoice(string idiomaIdentificado) {
             try
             {
+
                 if (GetPollyClient()) {
                     DescribeVoicesRequest describeVoicesRequest = new DescribeVoicesRequest
                     {
@@ -71,7 +72,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
                 if (GetPollyClient())
                 {
                     SynthesizeSpeechRequest synthesizeSpeechRequest = new SynthesizeSpeechRequest {
-                        Text = "Reazlizando um teste de voz",
+                        Text = translateTextResponse.TranslatedText,
                         TextType = "text",
                         OutputFormat = "mp3",
                         SampleRate = "8000",

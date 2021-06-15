@@ -91,6 +91,8 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label5 = new System.Windows.Forms.Label();
             this.tabGerenciarTranscricao = new System.Windows.Forms.TabPage();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.label50 = new System.Windows.Forms.Label();
+            this.btnTrechoTrasncription = new System.Windows.Forms.Button();
             this.pgbAnalizerTranslate = new System.Windows.Forms.ProgressBar();
             this.panel16 = new System.Windows.Forms.Panel();
             this.lblJobIdioma = new System.Windows.Forms.Label();
@@ -124,7 +126,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel9 = new System.Windows.Forms.Panel();
             this.label27 = new System.Windows.Forms.Label();
             this.lblContentActual = new System.Windows.Forms.Label();
-            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnSubstituir = new System.Windows.Forms.Button();
             this.btnAddContent = new System.Windows.Forms.Button();
             this.txtContent = new System.Windows.Forms.TextBox();
             this.cbAlternative = new System.Windows.Forms.ComboBox();
@@ -156,8 +158,8 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.btnTrechoTrasncription = new System.Windows.Forms.Button();
+            this.label52 = new System.Windows.Forms.Label();
+            this.rtbDetalhes = new System.Windows.Forms.RichTextBox();
             this.panelMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -190,7 +192,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(1115, 101);
+            this.panelMenu.Size = new System.Drawing.Size(1087, 101);
             this.panelMenu.TabIndex = 0;
             // 
             // panel1
@@ -205,7 +207,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1115, 93);
+            this.panel1.Size = new System.Drawing.Size(1087, 93);
             this.panel1.TabIndex = 0;
             // 
             // btnSelectBucktes
@@ -261,10 +263,10 @@ namespace Amazon_Transcribe_Speech_To_Text
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Square721 BT", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(72, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 22);
+            this.label1.Size = new System.Drawing.Size(191, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "AWS TRANSCRIBE";
             // 
@@ -393,7 +395,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panelExibicao.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelExibicao.Location = new System.Drawing.Point(0, 101);
             this.panelExibicao.Name = "panelExibicao";
-            this.panelExibicao.Size = new System.Drawing.Size(1115, 516);
+            this.panelExibicao.Size = new System.Drawing.Size(1087, 516);
             this.panelExibicao.TabIndex = 1;
             // 
             // tabControlBody
@@ -406,7 +408,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.tabControlBody.Location = new System.Drawing.Point(0, 0);
             this.tabControlBody.Name = "tabControlBody";
             this.tabControlBody.SelectedIndex = 0;
-            this.tabControlBody.Size = new System.Drawing.Size(1115, 516);
+            this.tabControlBody.Size = new System.Drawing.Size(1087, 516);
             this.tabControlBody.TabIndex = 0;
             this.tabControlBody.SelectedIndexChanged += new System.EventHandler(this.tabControlBody_SelectedIndexChanged);
             // 
@@ -469,7 +471,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label28.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label28.Location = new System.Drawing.Point(259, 153);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(74, 16);
+            this.label28.Size = new System.Drawing.Size(56, 16);
             this.label28.TabIndex = 27;
             this.label28.Text = "Transcrição";
             // 
@@ -488,7 +490,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label37.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label37.Location = new System.Drawing.Point(73, 112);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(41, 16);
+            this.label37.Size = new System.Drawing.Size(31, 16);
             this.label37.TabIndex = 25;
             this.label37.Text = "Herz: ";
             // 
@@ -507,7 +509,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label36.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label36.Location = new System.Drawing.Point(38, 87);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(76, 16);
+            this.label36.Size = new System.Drawing.Size(57, 16);
             this.label36.TabIndex = 23;
             this.label36.Text = "Linguagem: ";
             // 
@@ -538,7 +540,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label14.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label14.Location = new System.Drawing.Point(5, 61);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(109, 16);
+            this.label14.Size = new System.Drawing.Size(81, 16);
             this.label14.TabIndex = 21;
             this.label14.Text = "Formato da Midia:";
             // 
@@ -557,7 +559,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label34.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label34.Location = new System.Drawing.Point(24, 38);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(90, 16);
+            this.label34.Size = new System.Drawing.Size(66, 16);
             this.label34.TabIndex = 19;
             this.label34.Text = "Status do JOB:";
             // 
@@ -576,7 +578,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label33.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label33.Location = new System.Drawing.Point(27, 13);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(87, 16);
+            this.label33.Size = new System.Drawing.Size(63, 16);
             this.label33.TabIndex = 16;
             this.label33.Text = "Nome do JOB:";
             // 
@@ -595,7 +597,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label10.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label10.Location = new System.Drawing.Point(18, 13);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(159, 19);
+            this.label10.Size = new System.Drawing.Size(115, 19);
             this.label10.TabIndex = 15;
             this.label10.Text = "Arquivo Selecionado\r\n";
             // 
@@ -638,7 +640,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label32.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label32.Location = new System.Drawing.Point(323, 106);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(55, 16);
+            this.label32.Size = new System.Drawing.Size(43, 16);
             this.label32.TabIndex = 31;
             this.label32.Text = "Analizar";
             // 
@@ -659,7 +661,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label31.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label31.Location = new System.Drawing.Point(113, 7);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(238, 19);
+            this.label31.Size = new System.Drawing.Size(173, 19);
             this.label31.TabIndex = 22;
             this.label31.Text = "Selecionar Arquivo Pré-Incluso";
             // 
@@ -705,7 +707,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label30.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label30.Location = new System.Drawing.Point(276, 103);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(113, 16);
+            this.label30.Size = new System.Drawing.Size(84, 16);
             this.label30.TabIndex = 29;
             this.label30.Text = "View Transcription";
             // 
@@ -727,7 +729,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label11.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label11.Location = new System.Drawing.Point(132, 11);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(204, 19);
+            this.label11.Size = new System.Drawing.Size(152, 19);
             this.label11.TabIndex = 21;
             this.label11.Text = "Visualizar Pós-Transcrição";
             // 
@@ -797,7 +799,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label7.Font = new System.Drawing.Font("Bahnschrift Condensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label7.Location = new System.Drawing.Point(26, 77);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(147, 18);
+            this.label7.Size = new System.Drawing.Size(110, 18);
             this.label7.TabIndex = 4;
             this.label7.Text = "Incluir Novo Arquivo:";
             // 
@@ -825,7 +827,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label5.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(13, 13);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(224, 19);
+            this.label5.Size = new System.Drawing.Size(162, 19);
             this.label5.TabIndex = 0;
             this.label5.Text = "Gerenciar Arquivos no Bucket";
             // 
@@ -862,6 +864,28 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(1091, 443);
             this.panel12.TabIndex = 0;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label50.Location = new System.Drawing.Point(545, 97);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(91, 16);
+            this.label50.TabIndex = 47;
+            this.label50.Text = "Trecho Transcription";
+            // 
+            // btnTrechoTrasncription
+            // 
+            this.btnTrechoTrasncription.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTrechoTrasncription.BackgroundImage")));
+            this.btnTrechoTrasncription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTrechoTrasncription.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTrechoTrasncription.Location = new System.Drawing.Point(670, 89);
+            this.btnTrechoTrasncription.Name = "btnTrechoTrasncription";
+            this.btnTrechoTrasncription.Size = new System.Drawing.Size(37, 32);
+            this.btnTrechoTrasncription.TabIndex = 46;
+            this.btnTrechoTrasncription.UseVisualStyleBackColor = true;
+            this.btnTrechoTrasncription.Click += new System.EventHandler(this.btnTrechoTrasncription_Click);
             // 
             // pgbAnalizerTranslate
             // 
@@ -900,7 +924,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label53.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label53.Location = new System.Drawing.Point(78, 92);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(92, 16);
+            this.label53.Size = new System.Drawing.Size(67, 16);
             this.label53.TabIndex = 48;
             this.label53.Text = "Idioma do JOB:";
             // 
@@ -919,7 +943,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label51.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label51.Location = new System.Drawing.Point(78, 67);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(90, 16);
+            this.label51.Size = new System.Drawing.Size(66, 16);
             this.label51.TabIndex = 46;
             this.label51.Text = "Status do JOB:";
             // 
@@ -938,7 +962,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label49.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label49.Location = new System.Drawing.Point(78, 43);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(87, 16);
+            this.label49.Size = new System.Drawing.Size(63, 16);
             this.label49.TabIndex = 44;
             this.label49.Text = "Nome do JOB:";
             // 
@@ -948,7 +972,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label47.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label47.Location = new System.Drawing.Point(67, 15);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(215, 19);
+            this.label47.Size = new System.Drawing.Size(148, 19);
             this.label47.TabIndex = 43;
             this.label47.Text = "TRANSLATE PROPRIEDADES";
             // 
@@ -992,7 +1016,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label48.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label48.Location = new System.Drawing.Point(62, 16);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(220, 19);
+            this.label48.Size = new System.Drawing.Size(154, 19);
             this.label48.TabIndex = 44;
             this.label48.Text = "OUVIR TRADUÇÃO COM POLLY";
             // 
@@ -1002,7 +1026,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label46.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label46.Location = new System.Drawing.Point(18, 282);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(207, 19);
+            this.label46.Size = new System.Drawing.Size(146, 19);
             this.label46.TabIndex = 42;
             this.label46.Text = "TRANSCRIÇÃO MODIFICADA\n";
             // 
@@ -1012,7 +1036,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label44.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label44.Location = new System.Drawing.Point(18, 133);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(174, 19);
+            this.label44.Size = new System.Drawing.Size(123, 19);
             this.label44.TabIndex = 41;
             this.label44.Text = "TRANCRIÇÃO ORIGINAL";
             // 
@@ -1130,7 +1154,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label21.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label21.Location = new System.Drawing.Point(21, 13);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(185, 19);
+            this.label21.Size = new System.Drawing.Size(131, 19);
             this.label21.TabIndex = 36;
             this.label21.Text = "TRANCRIÇÃO COMPLETA";
             // 
@@ -1157,7 +1181,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.tabPageAudio.Location = new System.Drawing.Point(4, 24);
             this.tabPageAudio.Name = "tabPageAudio";
             this.tabPageAudio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAudio.Size = new System.Drawing.Size(1107, 488);
+            this.tabPageAudio.Size = new System.Drawing.Size(1079, 488);
             this.tabPageAudio.TabIndex = 1;
             this.tabPageAudio.Text = "View Transcription";
             // 
@@ -1176,13 +1200,15 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.BackColor = System.Drawing.Color.Tan;
+            this.panel6.Controls.Add(this.label52);
+            this.panel6.Controls.Add(this.rtbDetalhes);
             this.panel6.Controls.Add(this.panel2);
             this.panel6.Controls.Add(this.panel9);
             this.panel6.Controls.Add(this.panel8);
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Location = new System.Drawing.Point(8, 35);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1091, 415);
+            this.panel6.Size = new System.Drawing.Size(1063, 415);
             this.panel6.TabIndex = 0;
             // 
             // panel9
@@ -1190,7 +1216,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel9.BackColor = System.Drawing.Color.BurlyWood;
             this.panel9.Controls.Add(this.label27);
             this.panel9.Controls.Add(this.lblContentActual);
-            this.panel9.Controls.Add(this.btnRemove);
+            this.panel9.Controls.Add(this.btnSubstituir);
             this.panel9.Controls.Add(this.btnAddContent);
             this.panel9.Controls.Add(this.txtContent);
             this.panel9.Controls.Add(this.cbAlternative);
@@ -1205,9 +1231,10 @@ namespace Amazon_Transcribe_Speech_To_Text
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(339, 60);
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label27.Location = new System.Drawing.Point(287, 60);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(104, 15);
+            this.label27.Size = new System.Drawing.Size(131, 16);
             this.label27.TabIndex = 38;
             this.label27.Text = "Altere o Conteúdo";
             // 
@@ -1217,20 +1244,20 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.lblContentActual.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblContentActual.Location = new System.Drawing.Point(121, 56);
             this.lblContentActual.Name = "lblContentActual";
-            this.lblContentActual.Size = new System.Drawing.Size(133, 19);
+            this.lblContentActual.Size = new System.Drawing.Size(102, 19);
             this.lblContentActual.TabIndex = 37;
             this.lblContentActual.Text = "...............................";
             // 
-            // btnRemove
+            // btnSubstituir
             // 
-            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRemove.Location = new System.Drawing.Point(591, 90);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(69, 23);
-            this.btnRemove.TabIndex = 36;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnSubstituir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSubstituir.Location = new System.Drawing.Point(591, 90);
+            this.btnSubstituir.Name = "btnSubstituir";
+            this.btnSubstituir.Size = new System.Drawing.Size(69, 23);
+            this.btnSubstituir.TabIndex = 36;
+            this.btnSubstituir.Text = "Substituir";
+            this.btnSubstituir.UseVisualStyleBackColor = true;
+            this.btnSubstituir.Click += new System.EventHandler(this.btnSubstituir_Click);
             // 
             // btnAddContent
             // 
@@ -1248,10 +1275,10 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.txtContent.BackColor = System.Drawing.Color.BurlyWood;
             this.txtContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtContent.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtContent.Location = new System.Drawing.Point(449, 56);
+            this.txtContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtContent.Location = new System.Drawing.Point(424, 59);
             this.txtContent.Name = "txtContent";
-            this.txtContent.Size = new System.Drawing.Size(136, 19);
+            this.txtContent.Size = new System.Drawing.Size(161, 15);
             this.txtContent.TabIndex = 33;
             this.txtContent.Text = "Transcrição de Audio";
             // 
@@ -1264,6 +1291,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.cbAlternative.Name = "cbAlternative";
             this.cbAlternative.Size = new System.Drawing.Size(464, 23);
             this.cbAlternative.TabIndex = 17;
+            this.cbAlternative.SelectedIndexChanged += new System.EventHandler(this.cbAlternative_SelectedIndexChanged);
             // 
             // label25
             // 
@@ -1271,7 +1299,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label25.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label25.Location = new System.Drawing.Point(26, 90);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(89, 19);
+            this.label25.Size = new System.Drawing.Size(69, 19);
             this.label25.TabIndex = 32;
             this.label25.Text = "Alternativa";
             // 
@@ -1290,7 +1318,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label20.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label20.Location = new System.Drawing.Point(296, 9);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(90, 19);
+            this.label20.Size = new System.Drawing.Size(63, 19);
             this.label20.TabIndex = 29;
             this.label20.Text = "CONTEÚDO";
             // 
@@ -1305,7 +1333,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel8.Controls.Add(this.label12);
             this.panel8.Location = new System.Drawing.Point(896, 92);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(158, 133);
+            this.panel8.Size = new System.Drawing.Size(141, 133);
             this.panel8.TabIndex = 22;
             // 
             // lblType
@@ -1314,7 +1342,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.lblType.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblType.Location = new System.Drawing.Point(43, 97);
             this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(81, 19);
+            this.lblType.Size = new System.Drawing.Size(63, 19);
             this.lblType.TabIndex = 28;
             this.lblType.Text = "..................";
             // 
@@ -1323,7 +1351,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(65, 82);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(30, 15);
+            this.label26.Size = new System.Drawing.Size(31, 15);
             this.label26.TabIndex = 27;
             this.label26.Text = "Tipo";
             // 
@@ -1333,14 +1361,14 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.lblConfidence.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblConfidence.Location = new System.Drawing.Point(43, 56);
             this.lblConfidence.Name = "lblConfidence";
-            this.lblConfidence.Size = new System.Drawing.Size(78, 19);
+            this.lblConfidence.Size = new System.Drawing.Size(63, 19);
             this.lblConfidence.TabIndex = 26;
             this.lblConfidence.Text = "00.0000%";
             // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(44, 41);
+            this.label24.Location = new System.Drawing.Point(41, 41);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(68, 15);
             this.label24.TabIndex = 25;
@@ -1352,7 +1380,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label12.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label12.Location = new System.Drawing.Point(8, 9);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(141, 19);
+            this.label12.Size = new System.Drawing.Size(103, 19);
             this.label12.TabIndex = 24;
             this.label12.Text = "CARACTERISTICAS";
             // 
@@ -1375,7 +1403,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.lblEnd.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblEnd.Location = new System.Drawing.Point(61, 97);
             this.lblEnd.Name = "lblEnd";
-            this.lblEnd.Size = new System.Drawing.Size(71, 19);
+            this.lblEnd.Size = new System.Drawing.Size(57, 19);
             this.lblEnd.TabIndex = 23;
             this.lblEnd.Text = "00:00:00";
             // 
@@ -1384,7 +1412,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(56, 82);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(71, 15);
+            this.label22.Size = new System.Drawing.Size(72, 15);
             this.label22.TabIndex = 22;
             this.label22.Text = "Tempo Final";
             // 
@@ -1394,7 +1422,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.lblStart.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblStart.Location = new System.Drawing.Point(69, 56);
             this.lblStart.Name = "lblStart";
-            this.lblStart.Size = new System.Drawing.Size(49, 19);
+            this.lblStart.Size = new System.Drawing.Size(40, 19);
             this.lblStart.TabIndex = 21;
             this.lblStart.Text = "00.00\r\n";
             // 
@@ -1404,7 +1432,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label19.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label19.Location = new System.Drawing.Point(12, 9);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(169, 19);
+            this.label19.Size = new System.Drawing.Size(115, 19);
             this.label19.TabIndex = 20;
             this.label19.Text = "INTERVALO DE TEMPO";
             // 
@@ -1413,7 +1441,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(55, 41);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(77, 15);
+            this.label17.Size = new System.Drawing.Size(78, 15);
             this.label17.TabIndex = 20;
             this.label17.Text = "Tempo Inicial";
             // 
@@ -1423,7 +1451,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label18.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label18.Location = new System.Drawing.Point(355, 8);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(177, 19);
+            this.label18.Size = new System.Drawing.Size(122, 19);
             this.label18.TabIndex = 19;
             this.label18.Text = "TRANCRIÇÃO DE TEXTO\r\n";
             // 
@@ -1492,7 +1520,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label38.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label38.Location = new System.Drawing.Point(43, 97);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(81, 19);
+            this.label38.Size = new System.Drawing.Size(63, 19);
             this.label38.TabIndex = 28;
             this.label38.Text = "..................";
             // 
@@ -1501,7 +1529,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label39.AutoSize = true;
             this.label39.Location = new System.Drawing.Point(65, 82);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(30, 15);
+            this.label39.Size = new System.Drawing.Size(31, 15);
             this.label39.TabIndex = 27;
             this.label39.Text = "Tipo";
             // 
@@ -1511,7 +1539,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label40.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label40.Location = new System.Drawing.Point(43, 56);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(78, 19);
+            this.label40.Size = new System.Drawing.Size(63, 19);
             this.label40.TabIndex = 26;
             this.label40.Text = "00.0000%";
             // 
@@ -1530,7 +1558,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label42.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label42.Location = new System.Drawing.Point(8, 9);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(141, 19);
+            this.label42.Size = new System.Drawing.Size(103, 19);
             this.label42.TabIndex = 24;
             this.label42.Text = "CARACTERISTICAS";
             // 
@@ -1544,33 +1572,35 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.label45.TabIndex = 42;
             this.label45.Text = "MO";
             // 
-            // label50
+            // label52
             // 
-            this.label50.AutoSize = true;
-            this.label50.Font = new System.Drawing.Font("Bahnschrift Condensed", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label50.Location = new System.Drawing.Point(545, 97);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(123, 16);
-            this.label50.TabIndex = 47;
-            this.label50.Text = "Trecho Transcription";
+            this.label52.AutoSize = true;
+            this.label52.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label52.Location = new System.Drawing.Point(21, 232);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(128, 19);
+            this.label52.TabIndex = 43;
+            this.label52.Text = "DETALHES TRANCRIÇÃO";
             // 
-            // btnTrechoTrasncription
+            // rtbDetalhes
             // 
-            this.btnTrechoTrasncription.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTrechoTrasncription.BackgroundImage")));
-            this.btnTrechoTrasncription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnTrechoTrasncription.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnTrechoTrasncription.Location = new System.Drawing.Point(670, 89);
-            this.btnTrechoTrasncription.Name = "btnTrechoTrasncription";
-            this.btnTrechoTrasncription.Size = new System.Drawing.Size(37, 32);
-            this.btnTrechoTrasncription.TabIndex = 46;
-            this.btnTrechoTrasncription.UseVisualStyleBackColor = true;
-            this.btnTrechoTrasncription.Click += new System.EventHandler(this.btnTrechoTrasncription_Click);
+            this.rtbDetalhes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbDetalhes.BackColor = System.Drawing.Color.BurlyWood;
+            this.rtbDetalhes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbDetalhes.Location = new System.Drawing.Point(21, 264);
+            this.rtbDetalhes.Name = "rtbDetalhes";
+            this.rtbDetalhes.ReadOnly = true;
+            this.rtbDetalhes.Size = new System.Drawing.Size(1016, 134);
+            this.rtbDetalhes.TabIndex = 42;
+            this.rtbDetalhes.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1115, 617);
+            this.ClientSize = new System.Drawing.Size(1087, 617);
             this.Controls.Add(this.panelExibicao);
             this.Controls.Add(this.panelMenu);
             this.Name = "Form1";
@@ -1606,6 +1636,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.tabPageAudio.ResumeLayout(false);
             this.tabPageAudio.PerformLayout();
             this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -1693,7 +1724,7 @@ namespace Amazon_Transcribe_Speech_To_Text
         private System.Windows.Forms.ComboBox cbAlternative;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button btnAddContent;
-        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnSubstituir;
         private System.Windows.Forms.Button btnReGerar;
         private System.Windows.Forms.Label lblLanguage;
         private System.Windows.Forms.Label lblHertz;
@@ -1755,6 +1786,8 @@ namespace Amazon_Transcribe_Speech_To_Text
         private System.Windows.Forms.Button btnPolly;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Button btnTrechoTrasncription;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.RichTextBox rtbDetalhes;
     }
 }
 

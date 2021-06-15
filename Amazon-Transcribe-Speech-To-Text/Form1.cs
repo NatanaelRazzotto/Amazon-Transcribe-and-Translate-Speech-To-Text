@@ -131,7 +131,7 @@ namespace Amazon_Transcribe_Speech_To_Text
             double timeSelect = trackBarStateAudio.Value;
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void btnSubstituir_Click(object sender, EventArgs e)
         {
             double valueStart = Convert.ToDouble(lblStart.Text);
             double valueEnd = Convert.ToDouble(lblEnd.Text);
@@ -139,13 +139,20 @@ namespace Amazon_Transcribe_Speech_To_Text
             controller.setRemoveContentSelect(valueStart, valueEnd, indexSelect);
 
         }
+        private void cbAlternative_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            double valueStart = Convert.ToDouble(lblStart.Text);
+            double valueEnd = Convert.ToDouble(lblEnd.Text);
+            int indexSelect = cbAlternative.SelectedIndex;
+            controller.setRemoveContentSelect(valueStart, valueEnd, indexSelect);
+        }
 
         private void btnAddContent_Click(object sender, EventArgs e)
         {
             double valueStart = Convert.ToDouble(lblStart.Text);
             double valueEnd = Convert.ToDouble(lblEnd.Text);
             string content = txtContent.Text;
-            if (String.IsNullOrEmpty(content))
+            if (!String.IsNullOrEmpty(content))
             {
                 controller.setModifyContent(valueStart, valueEnd, content);
             }
@@ -306,11 +313,25 @@ namespace Amazon_Transcribe_Speech_To_Text
                 trackBarStateAudio.Minimum = 0;
             }
         }
-
-        public async void bindTextContent(List<Helpers.Models.Entity.Transcript> contentText)
+        public void bindMenuTranslate(LanguageCode languageCode, List<string> languageCodes)
+        {
+            lblIdiomaIdentificado.Text = languageCode;
+            languageCodes.ForEach(language => cbxIdiomas.Items.Add(language.ToString()));
+        }
+        public void bindTextContent(List<Helpers.Models.Entity.Transcript> contentText)
         {
             richTextBox1.Text = contentText.ElementAt(0).transcript;
-            List<Voice> voices = await controller.setFromListVoices();
+            rcbTraduzido.Clear();
+            tabControlBody.SelectedIndex = 1;
+
+        }
+        /*public void bindTextTranslator(string translatedText)
+        {
+            rcbTraduzido.Clear();
+            rcbTraduzido.AppendText(translatedText);
+        }*/
+
+        public void bindVoicesPolly(List<Voice> voices) {          
             foreach (Voice item in voices)
             {
                 cbxPolly.Items.Add(item.Id);
@@ -383,15 +404,14 @@ namespace Amazon_Transcribe_Speech_To_Text
             }
         }
 
+        public void displayDetailsTrancribe(string alternative)
+        {
+            rtbDetalhes.AppendText(alternative);
+        }
+
         private void cbFilesBucket_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        public void bindMenuTranslate(LanguageCode languageCode, List<string> languageCodes)
-        {
-            lblIdiomaIdentificado.Text = languageCode;
-            languageCodes.ForEach( language => cbxIdiomas.Items.Add(language.ToString()));
         }
 
         private void btnTraduzir_Click(object sender, EventArgs e)
@@ -429,5 +449,6 @@ namespace Amazon_Transcribe_Speech_To_Text
         {
             controller.trackAudio();
         }
+
     }
 }

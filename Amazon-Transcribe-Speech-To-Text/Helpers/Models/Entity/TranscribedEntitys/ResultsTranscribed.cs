@@ -9,6 +9,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
 {
     public class ResultsTranscribed
     {
+        public string language_code;
         public List<Transcript> transcripts { get; set; }
         public List<Item> items { get; set; }
         public List<Segment> Segments { get; set; }
