@@ -196,19 +196,16 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             }*/
 
         }
-        public void setViewDetailsContentSelect(double valueStart, double valueEnd, int indexSelect)
+        public async Task setViewDetailsContentSelect(TimeSpan currentAudio, Segment segment, int index = 0)
         {
             string detailsTranscribe = "";
-            AlternativeSegment alternative = speechToText.SearchContentTempo(valueStart, valueEnd, indexSelect);
+            AlternativeSegment alternative = segment.alternatives.ElementAt(index);
+            //AlternativeSegment alternative = speechToText.SearchContentTempo(segment.start_time, segment.end_time, indexSelect);
             if (alternative != null)
             {
-                detailsTranscribe = $"Alternativa nº: {indexSelect}, no periodo de tempo: inicial: {valueStart} até final: {valueEnd} \n";
+                detailsTranscribe = $"Alternativa nº: {index}, no periodo de tempo: inicial: {segment.start_time} até final: {segment.end_time} \n";
                 detailsTranscribe += $"Segmento da Transcrição: {alternative.transcript} \n";
                 detailsTranscribe += $"-Items do Segmento-";
-
-
-
-
 
                 formTranscribe.displayDetailsTrancribe(detailsTranscribe);
             }

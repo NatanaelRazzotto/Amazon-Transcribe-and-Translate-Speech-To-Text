@@ -102,6 +102,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity
                 TimeSpan currentAudio = playerMedia.getCurrentTime();
                 Item item = getTextFromSpeach(currentAudio);
                 Segment segment = getSegmentFromTime(currentAudio);
+                Controller.setViewDetailsContentSelect(currentAudio, segment, 0);
                 await Controller.displayParametersCurrents(currentAudio, item, segment);
 
              /*   if (statePlayback == PlaybackState.Playing)

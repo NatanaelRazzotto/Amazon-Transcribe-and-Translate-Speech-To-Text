@@ -17,6 +17,8 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Interface
         void ViewStatusofTranslateJob(TextTranslationJobProperties transcriptionJob, int incrementProgrees);
         void displayParametersInitials(TimeSpan totalTime, List<Models.Entity.Transcript> contentText, TranscriptionJob transcriptionJob);
         Task displayParametersCurrents(TimeSpan currentAudio, Item item , Segment segment);
+        Task setViewDetailsContentSelect(TimeSpan currentAudio, Segment segment, int index);//Segment segment
+        //void setViewDetailsContentSelect(double valueStart, double valueEnd, int indexSelect);//Segment segment
         void setTranscribedEditTranslator(TranslateTextResponse translatedText);
         void setFromListVoices(List<Voice> voices);
     }
