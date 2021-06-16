@@ -46,8 +46,6 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             return false;
         }
         public async Task<List<Voice>> DefinedVoices(string idiomaIdentificado) {
-            /*        private List<string> LanguageCodes = new List<string>() { "en", "ar", "de", "es", "fr", "it",
-                                                                    "ja", "pt", "ru", "tr"*/
 
             switch (idiomaIdentificado)
             {
@@ -124,7 +122,6 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                //    throw new ApplicationException("Erro ao obter Locutores ");
                 throw new ApplicationException(e.Message);
             }
         }

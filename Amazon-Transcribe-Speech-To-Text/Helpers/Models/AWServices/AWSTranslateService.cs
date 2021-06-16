@@ -19,7 +19,6 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
         private AmazonTranslateClient transcribeClient;
         private static readonly RegionEndpoint region = RegionEndpoint.USEast1;
         private IController controller;
-      //  private AWSUtil awsUtilService;
         public AWSTranslateService(IController controller) {
             this.controller = controller;
         }

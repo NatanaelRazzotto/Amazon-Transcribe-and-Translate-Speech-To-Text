@@ -1,15 +1,11 @@
 ﻿using Amazon;
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
-using Amazon.S3;
 using Amazon.TranscribeService;
 using Amazon.TranscribeService.Model;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
@@ -70,7 +66,6 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices
                     if (transcriptionJob.TranscriptionJobStatus == TranscriptionJobStatus.COMPLETED)
                     {
                         awsUtilProperts.JobName = extractFileKey(transcriptionJob.Transcript.TranscriptFileUri);
-                        //FileNameActual = fileName;
                         incrementProgree = 100;
                         controller.ViewStatusofTranscriptJob(transcriptionJob, incrementProgree);
                         runningJobStatus = false;

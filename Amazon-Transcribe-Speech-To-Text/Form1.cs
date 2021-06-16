@@ -7,15 +7,10 @@ using Amazon_Transcribe_Speech_To_Text.Helpers.Models;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys;
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.Entity.TranscribedEntitys.segments;
-using NAudio.Wave;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -54,8 +49,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             }
         }
 
-
-
         private void btnSelectBucktes_Click(object sender, EventArgs e)
         {
             string bucketInput = cbBucketsInputS3.SelectedItem.ToString();
@@ -90,7 +83,7 @@ namespace Amazon_Transcribe_Speech_To_Text
 
         private void cbFilesBucket_SelectedValueChanged(object sender, EventArgs e)
         {
-            if ((cbFilesBucket.SelectedItem != null))//&& (cbFilesBucket.ValueMember != "")
+            if ((cbFilesBucket.SelectedItem != null))
             {
                 controller.setFileFromAnalize(cbFilesBucket.SelectedItem.ToString());
             }
@@ -101,7 +94,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             pgbAnalizer.Minimum = 0;
             pgbAnalizer.Maximum = 100;
             controller.executeTranscribeToS3();
-            btnAnalizer.Enabled = true;
         }
 
         private void btnLoadLastTranscription_Click(object sender, EventArgs e)
@@ -112,7 +104,7 @@ namespace Amazon_Transcribe_Speech_To_Text
         }
         private void btnLoadTranscription_Click(object sender, EventArgs e)
         {
-            controller.TranscribeObject();//TranscribeObjectSelected();
+            controller.TranscribeObject();
             tabControlBody.SelectedIndex = 1;
             panel2.Enabled = true;
         }
@@ -352,26 +344,20 @@ namespace Amazon_Transcribe_Speech_To_Text
             tabControlBody.SelectedIndex = 1;
 
         }
-        /*public void bindTextTranslator(string translatedText)
-        {
-            rcbTraduzido.Clear();
-            rcbTraduzido.AppendText(translatedText);
-        }*/
 
-        public void bindVoicesPolly(List<Voice> voices) {          
+        public void bindVoicesPolly(List<Voice> voices) {
+            cbxPolly.Items.Clear();
             foreach (Voice item in voices)
             {
                 cbxPolly.Items.Add(item.Id);
             }
         }
-
         private void btnPolly_Click(object sender, EventArgs e)
-        {
-            // controller.setPlayMedia();
+        {  
             controller.setPlayMediaPolly();
         }
 
-        public async void displayTrancribe(Item item, Segment segment = null)
+        public void displayTrancribe(Item item, Segment segment = null)
         {
             if (item != null)
             {
@@ -385,29 +371,17 @@ namespace Amazon_Transcribe_Speech_To_Text
                         cbAlternative.Items.Clear();
                         foreach (AlternativeSegment alternative in segment.alternatives)
                         {
-                            cbAlternative.Items.Add($"{alternative.transcript}"); // - Confidence: {alternative.confidence.ToString("F")}%");
+                            cbAlternative.Items.Add($"{alternative.transcript}");
                         }
                         cbAlternative.SelectedIndex = 0;
                     }
                 }
 
-
-                // txtContent.Text = item.alternatives.ElementAt(0).content;
                 if (item.alternatives.Count > 0)
                 {
                     lblContentActual.Text = item.alternatives.ElementAt(0).content;
                 }
               
-                /* if (item.alternatives.Count != 0)
-                 {
-                     cbAlternative.Items.Clear();
-                     foreach (Alternatives alternative in item.alternatives)
-                     {
-                         cbAlternative.Items.Add($"{alternative.content} - Confidence: {alternative.confidence.ToString("F")}%");
-                     }
-                     cbAlternative.SelectedIndex = 0;
-                     txtContent.Text = item.alternatives.ElementAt(0).content;
-                 }*/
                 lblConfidence.Text = $"{item.averageConfidence}%";
                 lblType.Text = item.type;
             }
@@ -458,34 +432,18 @@ namespace Amazon_Transcribe_Speech_To_Text
             controller.setFromVoicesAsync(cbxPolly.Text);
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tabControlBody_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnTrechoTrasncription_Click(object sender, EventArgs e)
         {
             controller.trackAudio();
         }
 
-        private void cbxIdiomas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
-            if ((cbFilesBucket.SelectedItem != null))//&& (cbFilesBucket.ValueMember != "")
+            if ((cbFilesBucket.SelectedItem != null))
             {
                 controller.setFileFromAnalize(cbFilesBucket.SelectedItem.ToString());
             }
         }
-
 
     }
 }

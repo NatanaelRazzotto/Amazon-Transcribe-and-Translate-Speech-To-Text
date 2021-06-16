@@ -2,11 +2,7 @@
 using Amazon_Transcribe_Speech_To_Text.Helpers.Models.AWServices;
 using NAudio.Wave;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -68,13 +64,9 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
                     {
                         string downloadPath = await awsS3Sevices.DownloadFileS3(file);
                         if (!string.IsNullOrEmpty(downloadPath)) {
-                           /* string pathNewFile = searchFile(file);
-                            if (!string.IsNullOrEmpty(path))
-                            {*/
                                 mp3Reader = new Mp3FileReader(downloadPath);
                                 outputDevice.Init(mp3Reader);
                                 return true;
-                           // }
                         }
                         else
                         {
@@ -124,7 +116,7 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
             {
                 Console.WriteLine("a");
                 file = Path.GetFileName(file);
-                // string[] arquivos = Directory.GetFiles(pathAudios);
+
                 string[] arquivos = Directory.GetFiles(pathAudios, "*mp3", SearchOption.AllDirectories);
                 for (int i = 0; i < arquivos.Length; i++)
                 {
@@ -135,7 +127,6 @@ namespace Amazon_Transcribe_Speech_To_Text.Helpers.Models
                     }
                 }
             }
-            // var CurrentDirectory = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
             return null;
 

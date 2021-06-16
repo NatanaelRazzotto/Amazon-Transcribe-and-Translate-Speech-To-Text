@@ -290,7 +290,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(805, 62);
             this.panel2.TabIndex = 1;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // tbAccountant
             // 
@@ -418,7 +417,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.tabControlBody.SelectedIndex = 0;
             this.tabControlBody.Size = new System.Drawing.Size(1097, 516);
             this.tabControlBody.TabIndex = 0;
-            this.tabControlBody.SelectedIndexChanged += new System.EventHandler(this.tabControlBody_SelectedIndexChanged);
             // 
             // tabPageFile
             // 
@@ -526,7 +524,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             // 
             this.btnLoadLastTranscription.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLoadLastTranscription.BackgroundImage")));
             this.btnLoadLastTranscription.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnLoadLastTranscription.Enabled = false;
             this.btnLoadLastTranscription.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLoadLastTranscription.Location = new System.Drawing.Point(402, 96);
             this.btnLoadLastTranscription.Name = "btnLoadLastTranscription";
@@ -1160,7 +1157,6 @@ namespace Amazon_Transcribe_Speech_To_Text
             this.cbxIdiomas.Name = "cbxIdiomas";
             this.cbxIdiomas.Size = new System.Drawing.Size(156, 23);
             this.cbxIdiomas.TabIndex = 40;
-            this.cbxIdiomas.SelectedIndexChanged += new System.EventHandler(this.cbxIdiomas_SelectedIndexChanged);
             // 
             // label29
             // 
